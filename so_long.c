@@ -6,7 +6,7 @@
 /*   By: mriant <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:31:55 by mriant            #+#    #+#             */
-/*   Updated: 2022/01/20 17:43:48 by mriant           ###   ########.fr       */
+/*   Updated: 2022/01/25 13:29:54 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,20 @@ void	my_pixel_put(t_data *data, int x, int y, unsigned int color)
 	*(unsigned int *)dst = color;
 }
 
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 int	main(void)
 {
 	void	*mlx;
 	void	*mlx_win;
 	int		i;
 	int				j;
-	unsigned int	color;
+	int		t;
+	int		r;
+	int		g;
+	int		b;
 	t_data	img;
 
 	mlx = mlx_init();
@@ -42,6 +49,10 @@ int	main(void)
 	img.img = mlx_new_image(mlx, 1920, 1000);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_len, &img.endian);
 	i = 0;
+	t = 100;
+	r = 0;
+	g = 0;
+	b = 0;
 	color = 0x00000000;
 	while (i < 1920)
 	{
