@@ -6,11 +6,12 @@
 /*   By: mriant <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:31:55 by mriant            #+#    #+#             */
-/*   Updated: 2022/01/25 13:29:54 by mriant           ###   ########.fr       */
+/*   Updated: 2022/01/25 16:19:16 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
+#include <stdio.h>
 
 typedef struct	s_data {
 	void	*img;
@@ -28,20 +29,41 @@ void	my_pixel_put(t_data *data, int x, int y, unsigned int color)
 	*(unsigned int *)dst = color;
 }
 
-int	create_trgb(int t, int r, int g, int b)
+int	create_trgb(int *trgb)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	return (trgb[0] << 24 | trgb[1] << 16 | trgb[2] << 8 | trgb[3]);
 }
+
+void	shift_colors(int (*trgb)[4], int i)
+{
+	if (i < 126)
+		(*trgb)[3] ++;
+	else if (i < 255)
+	{
+		(*trgb)[3] ++;
+		(*trgb)[2] ++;
+	}
+	else if (i < 381)
+	{
+		(*trgb)[3] --;
+		(*trgb)[2] ++;
+		(*trgb)[1] ++;
+	}
+	else if (i < 511)
+	{
+		(*trgb)[3] --;
+		(*trgb)[2] --;
+		(*trgb)[1] ++;
+	}
+}
+
 int	main(void)
 {
 	void	*mlx;
 	void	*mlx_win;
 	int		i;
 	int				j;
-	int		t;
-	int		r;
-	int		g;
-	int		b;
+	int		trgb[4];
 	t_data	img;
 
 	mlx = mlx_init();
@@ -49,21 +71,20 @@ int	main(void)
 	img.img = mlx_new_image(mlx, 1920, 1000);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_len, &img.endian);
 	i = 0;
-	t = 100;
-	r = 0;
-	g = 0;
-	b = 0;
-	color = 0x00000000;
+	trgb[0] = 0;
+	trgb[1] = 0;
+	trgb[2] = 0;
+	trgb[3] = 0;
 	while (i < 1920)
 	{
 		j = 0;
 		while (j < 1000)
 		{
-			my_pixel_put(&img, i, j, color);
+			my_pixel_put(&img, i, j, create_trgb(trgb));
 			j ++;
 		}
 		i ++;
-		color += 10;
+		shift_colors(&trgb, i);
 	}
  	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);

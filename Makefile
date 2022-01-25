@@ -6,7 +6,7 @@
 #    By: mriant <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 11:37:43 by mriant            #+#    #+#              #
-#    Updated: 2022/01/25 13:10:00 by mriant           ###   ########.fr        #
+#    Updated: 2022/01/25 14:01:36 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ endif
 all: ${NAME}
 
 ${NAME}: ${LIB_MLX} ${OBJS}
-	${CC} ${FLAGS} $^ ${LIB_DIR} -lmlx ${FLAGS_OS} -o ${NAME}
+	${CC} ${FLAGS} ${OBJS} ${LIB_DIR} -lmlx ${FLAGS_OS} -o ${NAME}
 
 ${LIB_MLX}:
 	${RECIPE_OS}
