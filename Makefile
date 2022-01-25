@@ -6,7 +6,7 @@
 #    By: mriant <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 11:37:43 by mriant            #+#    #+#              #
-#    Updated: 2022/01/20 13:33:34 by mriant           ###   ########.fr        #
+#    Updated: 2022/01/25 12:03:17 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,16 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-INC_DIR = mlx
+KERNEL = $(shell uname -s)
 
-LIB_DIR = mlx
+ifeq ($(KERNEL), Linux)
+	INC_DIR = mlx_linux /usr/include
+	LIB_DIR = mlx_linux
+	FLAGS_OS = -lXext -lX11 -lm -lz
+else
+	INC_DIR = mlx
+	LIB_DIR = mlx
+	FLAGS_OS = -framework OpenGL -framework AppKit
 
 all: ${NAME}
 
