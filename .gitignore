@@ -9,5 +9,4 @@ main.c
 test_file
 *.swp
 *.dSYM
-test*
 so_long
