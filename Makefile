@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mriant <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 11:37:43 by mriant            #+#    #+#              #
-#    Updated: 2022/01/25 14:01:36 by mriant           ###   ########.fr        #
+#    Updated: 2022/01/31 09:32:20 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ DEPS = ${SRCS:.c=.d}
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g3
 
 KERNEL = $(shell uname -s)
 
@@ -61,4 +61,3 @@ re: fclean all
 -include ${DEPS}
 
 .PHONY: clean fclean re
-

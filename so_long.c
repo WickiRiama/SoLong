@@ -3,90 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mriant <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:31:55 by mriant            #+#    #+#             */
-/*   Updated: 2022/01/25 16:19:16 by mriant           ###   ########.fr       */
+/*   Updated: 2022/01/31 14:43:22 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_len;
-	int		endian;
-}				t_data;
+typedef struct s_vars {
+	void	*mlx;
+	void	*win;
+}				t_vars;
 
-void	my_pixel_put(t_data *data, int x, int y, unsigned int color)
+int	close(int keycode, t_vars *vars)
 {
-	char	*dst;
-
-	dst = data->addr + (y * data->line_len + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	if (keycode == 65307)
+	{
+		mlx_destroy_window(vars->mlx, vars->win);
+		exit(0);
+	}
+	return (0);
 }
 
-int	create_trgb(int *trgb)
+int	closex(t_vars *vars)
 {
-	return (trgb[0] << 24 | trgb[1] << 16 | trgb[2] << 8 | trgb[3]);
+	mlx_destroy_window(vars->mlx, vars->win);
+	exit(0);
+	return (0);
 }
 
-void	shift_colors(int (*trgb)[4], int i)
+int resize(t_vars *vars)
 {
-	if (i < 126)
-		(*trgb)[3] ++;
-	else if (i < 255)
-	{
-		(*trgb)[3] ++;
-		(*trgb)[2] ++;
-	}
-	else if (i < 381)
-	{
-		(*trgb)[3] --;
-		(*trgb)[2] ++;
-		(*trgb)[1] ++;
-	}
-	else if (i < 511)
-	{
-		(*trgb)[3] --;
-		(*trgb)[2] --;
-		(*trgb)[1] ++;
-	}
+	(void) vars;
+	printf("Not possible\n");
+	return (0);
 }
 
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-	int		i;
-	int				j;
-	int		trgb[4];
-	t_data	img;
+	t_vars	vars;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1000, "Granny lost her cats");
-	img.img = mlx_new_image(mlx, 1920, 1000);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_len, &img.endian);
-	i = 0;
-	trgb[0] = 0;
-	trgb[1] = 0;
-	trgb[2] = 0;
-	trgb[3] = 0;
-	while (i < 1920)
+	vars.mlx = mlx_init();
+	if (!(vars.mlx))
 	{
-		j = 0;
-		while (j < 1000)
-		{
-			my_pixel_put(&img, i, j, create_trgb(trgb));
-			j ++;
-		}
-		i ++;
-		shift_colors(&trgb, i);
+		printf("MLX not initialized\n");
+		return (0);
 	}
- 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
-	return (0);
+	vars.win = mlx_new_window(vars.mlx, 640, 480, "Hello world!");
+	mlx_key_hook(vars.win, close, &vars);
+	mlx_hook(vars.win, 17, 0, closex, &vars);
+	mlx_hook(vars.win, 25, 0, resize, &vars);
+	mlx_loop(vars.mlx);
 }
