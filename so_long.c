@@ -32,19 +32,12 @@ typedef struct s_vars {
 int	close(int keycode, t_vars *vars)
 {
 	if (keycode == 65307)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		vars->win = NULL;
 		mlx_loop_end(vars->mlx);
-	}
 	return (0);
 }
 
 int	closex(t_vars *vars)
 {
-	mlx_destroy_image(vars->mlx, vars->img.mlx_img);
-	mlx_destroy_window(vars->mlx, vars->win);
-	vars->win = NULL;
 	mlx_loop_end(vars->mlx);
 	return (0);
 }
@@ -121,6 +114,8 @@ int	main(void)
 	mlx_loop_hook(vars.mlx, render, &vars);
 	mlx_hook(vars.win, 17, 0, closex, &vars);
 	mlx_loop(vars.mlx);
+	mlx_destroy_image(vars.mlx, vars.img.mlx_img);
+	mlx_destroy_window(vars.mlx, vars.win);
 	mlx_destroy_display(vars.mlx);
 	free(vars.mlx);
 	return (0);
