@@ -6,7 +6,7 @@
 #    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 11:37:43 by mriant            #+#    #+#              #
-#    Updated: 2022/02/02 17:08:26 by mriant           ###   ########.fr        #
+#    Updated: 2022/02/02 17:51:36 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,13 +31,13 @@ ifeq ($(KERNEL), Linux)
 	LIB_DIR = $(addprefix -L, mlx_linux /usr/lib libft)
 	LIB_MLX = mlx_linux/libmlx.a
 	FLAGS_OS = -lXext -lX11 -lm -lz
-	RECIPE_OS = make -C mlx_linux
+	RECIPE_OS = make -s -C mlx_linux
 else
 	INC_DIR = $(addprefix -I, mlx includes libft)
 	LIB_DIR = $(addprefix -L, mlx libft)
 	FLAGS_OS = -framework OpenGL -framework AppKit
 	LIB_MLX = mlx/mlx.a
-	RECIPE_OS = make -C mlx
+	RECIPE_OS = make -s -C mlx
 endif
 
 all: ${NAME}
@@ -49,19 +49,19 @@ ${LIB_MLX}:
 	${RECIPE_OS}
 
 ${LIB_FT}:
-	make -C libft bonus
+	make -s -C libft bonus
 
 %.o: %.c
 	${CC} ${FLAGS} -MMD -c $< -o $@ ${INC_DIR}
 
 clean:
 	rm -rf ${OBJS} ${DEPS}
-	make -C libft clean
+	make -s -C libft clean
 
 fclean: clean
 	rm -rf ${NAME}
 	${RECIPE_OS} clean
-	make -C libft fclean
+	make -s -C libft fclean
 
 re: fclean all
 
