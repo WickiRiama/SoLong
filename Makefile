@@ -6,15 +6,17 @@
 #    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 11:37:43 by mriant            #+#    #+#              #
-#    Updated: 2022/02/02 12:57:12 by mriant           ###   ########.fr        #
+#    Updated: 2022/02/02 17:08:26 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-SRCS = so_long.c
+SRCS = $(addprefix ./srcs/, so_long.c get_next_line.c get_next_line_utils.c parsing.c)
 
 OBJS = ${SRCS:.c=.o}
+
+LIB_FT = libft/libft.a
 
 DEPS = ${SRCS:.c=.d}
 
@@ -25,14 +27,14 @@ FLAGS = -Wall -Wextra -Werror -g3
 KERNEL = $(shell uname -s)
 
 ifeq ($(KERNEL), Linux)
-	INC_DIR = $(addprefix -I, mlx_linux /usr/include .)
-	LIB_DIR = $(addprefix -L, mlx_linux /usr/lib .)
+	INC_DIR = $(addprefix -I, mlx_linux /usr/include includes libft)
+	LIB_DIR = $(addprefix -L, mlx_linux /usr/lib libft)
 	LIB_MLX = mlx_linux/libmlx.a
 	FLAGS_OS = -lXext -lX11 -lm -lz
 	RECIPE_OS = make -C mlx_linux
 else
-	INC_DIR = $(addprefix -I, mlx)
-	LIB_DIR = $(addprefix -L, mlx)
+	INC_DIR = $(addprefix -I, mlx includes libft)
+	LIB_DIR = $(addprefix -L, mlx libft)
 	FLAGS_OS = -framework OpenGL -framework AppKit
 	LIB_MLX = mlx/mlx.a
 	RECIPE_OS = make -C mlx
@@ -40,21 +42,26 @@ endif
 
 all: ${NAME}
 
-${NAME}: ${LIB_MLX} ${OBJS}
-	${CC} ${FLAGS} ${OBJS} ${LIB_DIR} -lmlx ${FLAGS_OS} -o ${NAME}
+${NAME}: ${LIB_MLX} ${LIB_FT} ${OBJS}
+	${CC} ${FLAGS} ${OBJS} ${LIB_DIR} -lmlx -lft ${FLAGS_OS} -o ${NAME}
 
 ${LIB_MLX}:
 	${RECIPE_OS}
+
+${LIB_FT}:
+	make -C libft bonus
 
 %.o: %.c
 	${CC} ${FLAGS} -MMD -c $< -o $@ ${INC_DIR}
 
 clean:
 	rm -rf ${OBJS} ${DEPS}
+	make -C libft clean
 
 fclean: clean
 	rm -rf ${NAME}
 	${RECIPE_OS} clean
+	make -C libft fclean
 
 re: fclean all
 
