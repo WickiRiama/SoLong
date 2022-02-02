@@ -6,7 +6,7 @@
 #    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 11:37:43 by mriant            #+#    #+#              #
-#    Updated: 2022/01/31 09:32:20 by mriant           ###   ########.fr        #
+#    Updated: 2022/02/02 12:57:12 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ FLAGS = -Wall -Wextra -Werror -g3
 KERNEL = $(shell uname -s)
 
 ifeq ($(KERNEL), Linux)
-	INC_DIR = $(addprefix -I, mlx_linux /usr/include)
-	LIB_DIR = $(addprefix -L, mlx_linux /usr/lib)
+	INC_DIR = $(addprefix -I, mlx_linux /usr/include .)
+	LIB_DIR = $(addprefix -L, mlx_linux /usr/lib .)
 	LIB_MLX = mlx_linux/libmlx.a
 	FLAGS_OS = -lXext -lX11 -lm -lz
 	RECIPE_OS = make -C mlx_linux

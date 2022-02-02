@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:31:55 by mriant            #+#    #+#             */
-/*   Updated: 2022/01/31 17:22:42 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/02 13:47:55 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,15 @@ typedef struct s_img
 	int		bpp;
 	int		line_len;
 	int		endian;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef struct s_vars {
 	void	*mlx;
 	void	*win;
 	t_img	img;
+	t_img	floor;
 }				t_vars;
 
 int	close(int keycode, t_vars *vars)
@@ -44,11 +47,11 @@ int	closex(t_vars *vars)
 
 void	img_pix_put(t_img *img, int x, int y, int color)
 {
-	char    *pixel;
+	char	*pixel;
 	int		i;
 
 	i = img->bpp - 8;
-    pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	while (i >= 0)
 	{
 		/* big endian, MSB is the leftmost bit */
@@ -61,31 +64,29 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	}
 }
 
-void	render_line(t_img *img, int y, int color)
+void	render_bg(t_img *floor, t_vars *vars)
 {
 	int	i;
 	int	j;
 
 		i = 0;
-		while (i < 640)
+	while (i < 640)
+	{
+		j = 0;
+		while (j < 480)
 		{
-			j = 0;
-			while (j < 480)
-			{	
-				if (j == y)
-					img_pix_put(img, i, j, color);
-				j ++;	
-			}
-			i ++;
+			mlx_put_image_to_window(vars->mlx, vars->win, floor->mlx_img, i, j);
+			j += floor->height;
 		}
+		i += floor->width;
+	}
 }
 
 int	render(t_vars *vars)
 {
 	if (vars->win)
 	{
-		render_line(&vars->img, 50, 0xFF0000);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img.mlx_img, 0, 0);
+		render_bg(&vars->floor, vars);
 	}
 	return (0);
 }
@@ -97,7 +98,7 @@ int	main(void)
 	vars.mlx = mlx_init();
 	if (!(vars.mlx))
 	{
-		printf("Error\nCould'nt initialize MLX\n");
+		perror("Error\nCould'nt initialize MLX\n");
 		return (-1);
 	}
 	vars.win = mlx_new_window(vars.mlx, 640, 480, "Hello world!");
@@ -108,13 +109,15 @@ int	main(void)
 		free(vars.mlx);
 		return (-1);
 	}
-	vars.img.mlx_img = mlx_new_image(vars.mlx, 640, 480);
-	vars.img.addr = mlx_get_data_addr(vars.img.mlx_img, &vars.img.bpp, &vars.img.line_len, &vars.img.endian);
+	//vars.img.mlx_img = mlx_new_image(vars.mlx, 640, 480);
+	//vars.img.addr = mlx_get_data_addr(vars.img.mlx_img, &vars.img.bpp,
+	//		&vars.img.line_len, &vars.img.endian);
+	vars.floor.mlx_img = mlx_xpm_file_to_image (vars.mlx, "./assets/grass.xpm", &vars.floor.width, &vars.floor.height);
 	mlx_key_hook(vars.win, close, &vars);
 	mlx_loop_hook(vars.mlx, render, &vars);
 	mlx_hook(vars.win, 17, 0, closex, &vars);
 	mlx_loop(vars.mlx);
-	mlx_destroy_image(vars.mlx, vars.img.mlx_img);
+	mlx_destroy_image(vars.mlx, vars.floor.mlx_img);
 	mlx_destroy_window(vars.mlx, vars.win);
 	mlx_destroy_display(vars.mlx);
 	free(vars.mlx);
