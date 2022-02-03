@@ -20,7 +20,7 @@ LIB_FT = libft/libft.a
 
 DEPS = ${SRCS:.c=.d}
 
-CC = gcc
+CC = clang
 
 FLAGS = -Wall -Wextra -Werror -g3
 
