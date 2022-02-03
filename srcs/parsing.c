@@ -12,12 +12,51 @@
 
 #include "so_long.h"
 
-int	build_map(char *m_path, t_vars *vars)
+t_list	*ft_read_grid(int fd)
 {
-	int		fd;
-	int		i;
 	t_list	*first;
 	t_list	*line;
+	
+	first = NULL;
+	line = ft_lstnew(get_next_line(fd));
+	while (line->content)
+	{
+		ft_lstadd_back(&first, line);
+		line = ft_lstnew(get_next_line(fd));
+	}
+	return (first);
+}
+
+int ft_parse_grid(t_list *first, t_vars *vars)
+{
+	t_list	*line;
+	int		i;
+
+	i = ft_lstsize(first);
+	vars->grid = malloc(sizeof(char) * i);
+	if (!(vars->grid))
+	{
+		printf("Error\nCouldn't allocate map\n");
+		ft_lstclear(&first, &free);
+		return (-1);
+	}
+	line = first;
+	i = 0;
+	while (line)
+	{
+		vars->grid[i] = ft_strdup(line->content);
+		line = line->next;
+		i ++;
+	}
+	vars->grid[i] = NULL;
+	ft_lstclear(&first, &free);
+	return (0);
+}
+
+int	ft_build_map(char *m_path, t_vars *vars)
+{
+	int		fd;
+	t_list	*lst_grid;	
 
 	fd = open(m_path, O_RDONLY);
 	if (fd == -1)
@@ -25,30 +64,18 @@ int	build_map(char *m_path, t_vars *vars)
 		printf("Error\nCan't open file %s\n.", m_path);
 		return (-1);
 	}
-	first = NULL;
-	line = ft_lstnew(get_next_line(fd));
-	i = 0;
-	while (line->content)
+	lst_grid = ft_read_grid(fd);
+	if (!lst_grid)
 	{
-		ft_lstadd_back(&first, line);
-		line = ft_lstnew(get_next_line(fd));
-		i ++;
+		printf("Error\nCouldn't read map\n");
+		return (-1);
 	}
-	vars->grid = malloc(sizeof(char) * i);
-	line = first;
-	i = 0;
-	while (line)
-	{
-		vars->grid[i] = ft_strdup(line->content);
-		printf("%s\n", vars->grid[i]);
-		line = line->next;
-		i ++;
-	}
-	vars->grid[i] = NULL;
+	ft_parse_grid(lst_grid, vars);
 	fd = close(fd);
 	if (fd == -1)
 	{
 		printf("Error\nCan't close file %s.\n", m_path);
+		return (-1);
 	}
 	return (0);
 }

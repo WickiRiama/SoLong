@@ -44,6 +44,6 @@ int		closex(t_vars *vars);
 void	img_pix_put(t_img *img, int x, int y, int color);
 void	render_bg(t_img *floor, t_vars *vars);
 int		render(t_vars *vars);
-int		build_map(char *m_path, t_vars *vars);
+int		ft_build_map(char *m_path, t_vars *vars);
 
 #endif

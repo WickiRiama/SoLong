@@ -81,7 +81,7 @@ int	main(int ac, char ** av)
 		printf("Error\nPass the path to the map as argument.\n");
 		return (-1);
 	}
-	ret = build_map(av[1], &vars);
+	ret = ft_build_map(av[1], &vars);
 	if (ret == -1)
 		return (-1);
 	vars.mlx = mlx_init();
@@ -112,5 +112,12 @@ int	main(int ac, char ** av)
 	mlx_destroy_window(vars.mlx, vars.win);
 	mlx_destroy_display(vars.mlx);
 	free(vars.mlx);
+	ret = 0;
+	while (vars.grid[ret])
+	{
+		free(vars.grid[ret]);
+		ret ++;
+	}
+	free(vars.grid);
 	return (0);
 }
