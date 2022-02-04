@@ -30,10 +30,17 @@ typedef struct s_img
 	int		height;
 }	t_img;
 
+typedef struct s_map
+{
+	char	**grid;
+	int		width;
+	int		height;
+}				t_map;
+
 typedef struct s_vars {
 	void	*mlx;
 	void	*win;
-	char	**grid;
+	t_map	map;
 	t_img	img;
 	t_img	floor;
 	t_img	wall;
@@ -42,7 +49,7 @@ typedef struct s_vars {
 int		key_release(int keycode, t_vars *vars);
 int		closex(t_vars *vars);
 void	img_pix_put(t_img *img, int x, int y, int color);
-void	render_bg(t_img *floor, t_vars *vars);
+void	render_bg(t_vars *vars);
 int		render(t_vars *vars);
 int		ft_build_map(char *m_path, t_vars *vars);
 

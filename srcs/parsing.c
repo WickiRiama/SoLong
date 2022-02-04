@@ -28,19 +28,19 @@ t_list	*ft_read_grid(int fd)
 	return (first);
 }
 
-char **ft_parse_grid(t_list **first)
+int ft_parse_grid(t_list **first, t_vars *vars)
 {
 	t_list	*line;
 	int		i;
 	char	**grid;
 
-	i = ft_lstsize(*first);
-	grid = malloc(sizeof(char *) * (i + 1));
+	vars->map.height = ft_lstsize(*first);
+	grid = malloc(sizeof(char *) * (vars->map.height + 1));
 	if (!grid)
 	{
 		printf("Error\nCouldn't allocate map\n");
 		ft_lstclear(first, &free);
-		return (NULL);
+		return (-1);
 	}
 	line = *first;
 	i = 0;
@@ -51,14 +51,17 @@ char **ft_parse_grid(t_list **first)
 		i ++;
 	}
 	grid[i] = NULL;
+	vars->map.grid = grid;
+	vars->map.width = ft_strlen(grid[0]);
 	ft_lstclear(first, &free);
-	return (grid);
+	return (0);
 }
 
 int	ft_build_map(char *m_path, t_vars *vars)
 {
 	int		fd;
-	t_list	*lst_grid;	
+	t_list	*lst_grid;
+	int		ret;
 
 	fd = open(m_path, O_RDONLY);
 	if (fd == -1)
@@ -72,7 +75,12 @@ int	ft_build_map(char *m_path, t_vars *vars)
 		printf("Error\nCouldn't read map\n");
 		return (-1);
 	}
-	vars->grid = ft_parse_grid(&lst_grid);
+	ret = ft_parse_grid(&lst_grid, vars);
+	if(ret == -1)
+	{
+		printf("Error\nCouldn't read map\n");
+		return (-1);
+	}
 	fd = close(fd);
 	if (fd == -1)
 	{

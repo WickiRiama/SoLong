@@ -44,21 +44,44 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	}
 }
 
-void	render_bg(t_img *floor, t_vars *vars)
+void	render_tile(t_vars *vars, t_img tile, int i, int j)
+{
+	int		x;
+	int		y;
+	char	*pixel;
+
+	x = 0;
+	while (x < tile.width)
+	{
+		y = 0;
+		while (y < tile.height)
+		{
+			pixel = tile.addr + (y * tile.line_len + x * (tile.bpp / 8));
+			img_pix_put(&vars->img, x + i, y + j, *pixel);
+			y ++;
+		}
+		x ++;
+	}
+}
+
+void	render_bg(t_vars *vars)
 {
 	int	i;
 	int	j;
 
 		i = 0;
-	while (i < 640)
+	while (i < vars->map.width)
 	{
 		j = 0;
-		while (j < 480)
+		while (j < vars->map.height)
 		{
-			mlx_put_image_to_window(vars->mlx, vars->win, floor->mlx_img, i, j);
-			j += floor->height;
+			if (vars->map.grid[i][j] == 1)
+				render_tile(vars, vars->wall, i, j);
+			else
+				render_tile(vars, vars->floor, i, j);
+			j += vars->floor.height;
 		}
-		i += floor->width;
+		i += vars->floor.width;
 	}
 }
 
@@ -66,7 +89,8 @@ int	render(t_vars *vars)
 {
 	if (vars->win)
 	{
-		render_bg(&vars->floor, vars);
+		render_bg(vars);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img.mlx_img, 0, 0);
 	}
 	return (0);
 }
@@ -90,7 +114,7 @@ int	main(int ac, char ** av)
 		perror("Error\nCould'nt initialize MLX\n");
 		return (-1);
 	}
-	vars.win = mlx_new_window(vars.mlx, 640, 480, "Hello world!");
+	vars.win = mlx_new_window(vars.mlx, vars.map.width, vars.map.height, "So long");
 	if (!(vars.win))
 	{
 		printf("Error\nCould'nt initialize window\n");
@@ -98,11 +122,15 @@ int	main(int ac, char ** av)
 		free(vars.mlx);
 		return (-1);
 	}
-	//vars.img.mlx_img = mlx_new_image(vars.mlx, 640, 480);
-	//vars.img.addr = mlx_get_data_addr(vars.img.mlx_img, &vars.img.bpp,
-	//		&vars.img.line_len, &vars.img.endian);
+	vars.img.mlx_img = mlx_new_image(vars.mlx, 640, 480);
 	vars.floor.mlx_img = mlx_xpm_file_to_image (vars.mlx, "./assets/grass.xpm", &vars.floor.width, &vars.floor.height);
 	vars.wall.mlx_img = mlx_xpm_file_to_image (vars.mlx, "./assets/tree.xpm", &vars.wall.width, &vars.wall.height);
+	vars.img.addr = mlx_get_data_addr(vars.img.mlx_img, &vars.img.bpp,
+			&vars.img.line_len, &vars.img.endian);
+	vars.floor.addr = mlx_get_data_addr(vars.floor.mlx_img, &vars.floor.bpp,
+			&vars.floor.line_len, &vars.floor.endian);
+	vars.wall.addr = mlx_get_data_addr(vars.wall.mlx_img, &vars.wall.bpp,
+			&vars.wall.line_len, &vars.wall.endian);
 	mlx_key_hook(vars.win, key_release, &vars);
 	mlx_loop_hook(vars.mlx, render, &vars);
 	mlx_hook(vars.win, 17, 0, closex, &vars);
@@ -113,11 +141,11 @@ int	main(int ac, char ** av)
 	mlx_destroy_display(vars.mlx);
 	free(vars.mlx);
 	ret = 0;
-	while (vars.grid[ret])
+	while (vars.map.grid[ret])
 	{
-		free(vars.grid[ret]);
+		free(vars.map.grid[ret]);
 		ret ++;
 	}
-	free(vars.grid);
+	free(vars.map.grid);
 	return (0);
 }
