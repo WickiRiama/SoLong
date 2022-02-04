@@ -52,7 +52,7 @@ int ft_parse_grid(t_list **first, t_vars *vars)
 	}
 	grid[i] = NULL;
 	vars->map.grid = grid;
-	vars->map.width = ft_strlen(grid[0]);
+	vars->map.width = ft_strlen(grid[0]) - 1;
 	ft_lstclear(first, &free);
 	return (0);
 }
