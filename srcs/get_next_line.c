@@ -20,7 +20,7 @@ char	*ft_strjoin_free(char *s, char const *s2)
 
 	i = 0;
 	j = 0;
-	result = ft_calloc(sizeof(char), (ft_strlen(s) + ft_strlen(s2) + 1));
+	result = ft_calloc(sizeof(char), (ft_strlen_gnl(s) + ft_strlen_gnl(s2) + 1));
 	if (!result)
 	{
 		free (s);

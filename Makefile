@@ -49,19 +49,19 @@ ${LIB_MLX}:
 	${RECIPE_OS}
 
 ${LIB_FT}:
-	make -s -C libft bonus
+	make -C libft bonus
 
 %.o: %.c
 	${CC} ${FLAGS} -MMD -c $< -o $@ ${INC_DIR}
 
 clean:
 	rm -rf ${OBJS} ${DEPS}
-	make -s -C libft clean
+	make -C libft clean
 
 fclean: clean
 	rm -rf ${NAME}
 	${RECIPE_OS} clean
-	make -s -C libft fclean
+	make -C libft fclean
 
 re: fclean all
 

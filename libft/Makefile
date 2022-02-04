@@ -63,7 +63,7 @@ OBJ = ${SRCS:%.c=%.o}
 
 BONUS_OBJ = ${BONUS_SRCS:%.c=%.o}
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g3
 
 ${NAME}: ${OBJ} ${HEAD_PATH}/libft.h
 	ar -rcs ${NAME} ${OBJ}
@@ -74,7 +74,7 @@ bonus: ${NAME} ${BONUS_OBJ}
 	ar -rcs ${NAME} ${BONUS_OBJ}
 
 %.o: %.c ${HEAD_PATH}/libft.h
-	gcc ${FLAGS} -c $< -o $@ -I ${HEAD_PATH}
+	clang ${FLAGS} -c $< -o $@ -I ${HEAD_PATH}
 
 clean:
 	rm -rf ${OBJ} ${BONUS_OBJ}
