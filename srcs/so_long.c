@@ -64,6 +64,26 @@ void	render_tile(t_vars *vars, t_img tile, int i, int j)
 		while (y < tile.height)
 		{
 			pixel = tile.addr + (y * tile.line_len + x * (tile.bpp / 8));
+			img_pix_put(&vars->bg, x + i * tile.width, y + j * tile.height, pixel);
+			y ++;
+		}
+		x ++;
+	}
+}
+
+void	render_img(t_vars *vars, t_img tile, int i, int j)
+{
+	int		x;
+	int		y;
+	char	*pixel;
+
+	x = 0;
+	while (x < tile.width)
+	{
+		y = 0;
+		while (y < tile.height)
+		{
+			pixel = tile.addr + (y * tile.line_len + x * (tile.bpp / 8));
 			img_pix_put(&vars->img, x + i * tile.width, y + j * tile.height, pixel);
 			y ++;
 		}
@@ -96,6 +116,7 @@ int	render(t_vars *vars)
 {
 	if (vars->win)
 	{
+		render_img(vars, vars->bg, 0, 0);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->img.mlx_img, 0, 0);
 	}
 	return (0);
@@ -120,7 +141,6 @@ int	main(int ac, char ** av)
 		perror("Error\nCould'nt initialize MLX\n");
 		return (-1);
 	}
-	printf("w : %d\n", vars.map.width);
 	vars.win = mlx_new_window(vars.mlx, vars.map.width * 48, vars.map.height * 48, "So long");
 	if (!(vars.win))
 	{
@@ -131,9 +151,16 @@ int	main(int ac, char ** av)
 	}
 	vars.floor.mlx_img = mlx_xpm_file_to_image (vars.mlx, "./assets/grass.xpm", &vars.floor.width, &vars.floor.height);
 	vars.wall.mlx_img = mlx_xpm_file_to_image (vars.mlx, "./assets/tree.xpm", &vars.wall.width, &vars.wall.height);
-	vars.img.mlx_img = mlx_new_image(vars.mlx, vars.floor.width * vars.map.width,  vars.floor.height * vars.map.height);
+	vars.bg.width = vars.floor.width * vars.map.width;
+	vars.bg.height = vars.floor.height * vars.map.height;
+	vars.img.width = vars.floor.width * vars.map.width;
+	vars.img.height = vars.floor.height * vars.map.height;
+	vars.bg.mlx_img = mlx_new_image(vars.mlx, vars.bg.width,  vars.bg.height);
+	vars.img.mlx_img = mlx_new_image(vars.mlx, vars.img.width,  vars.img.height);
 	vars.img.addr = mlx_get_data_addr(vars.img.mlx_img, &vars.img.bpp,
 			&vars.img.line_len, &vars.img.endian);
+	vars.bg.addr = mlx_get_data_addr(vars.bg.mlx_img, &vars.bg.bpp,
+			&vars.bg.line_len, &vars.bg.endian);
 	vars.floor.addr = mlx_get_data_addr(vars.floor.mlx_img, &vars.floor.bpp,
 			&vars.floor.line_len, &vars.floor.endian);
 	vars.wall.addr = mlx_get_data_addr(vars.wall.mlx_img, &vars.wall.bpp,
@@ -145,6 +172,7 @@ int	main(int ac, char ** av)
 	mlx_loop(vars.mlx);
 	mlx_destroy_image(vars.mlx, vars.img.mlx_img);
 	mlx_destroy_image(vars.mlx, vars.floor.mlx_img);
+	mlx_destroy_image(vars.mlx, vars.bg.mlx_img);
 	mlx_destroy_image(vars.mlx, vars.wall.mlx_img);
 	mlx_destroy_window(vars.mlx, vars.win);
 	mlx_destroy_display(vars.mlx);

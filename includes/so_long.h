@@ -37,6 +37,24 @@ typedef struct s_map
 	int		height;
 }				t_map;
 
+typedef struct s_hero
+{
+	t_img	front_0;
+	t_img	front_1;
+	t_img	front_2;
+	t_img	back_0;
+	t_img	back_1;
+	t_img	back_2;
+	t_img	left_0;
+	t_img	left_1;
+	t_img	left_2;
+	t_img	right_0;
+	t_img	right_1;
+	t_img	right_2;
+	int		x;
+	int		y;
+}				t_hero;
+
 typedef struct s_vars {
 	void	*mlx;
 	void	*win;
@@ -44,6 +62,8 @@ typedef struct s_vars {
 	t_img	img;
 	t_img	floor;
 	t_img	wall;
+	t_img	bg;
+	t_hero	hero;
 }				t_vars;
 
 int		key_release(int keycode, t_vars *vars);
