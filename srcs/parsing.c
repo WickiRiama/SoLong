@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/07 16:09:57 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/07 17:26:08 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,32 +56,28 @@ int	ft_parse_grid(t_list **first, t_vars *vars)
 	return (0);
 }
 
-int	ft_check_map(t_vars *vars, char **grid)
+int	ft_check_map1(t_vars *vars, char **grid)
 {
 	int	i;
-	int	j;
 	int	count_p;
 
-	i = -1;
+	i = 0;
 	count_p = 0;
-	while (grid[i++])
+	while (grid[i])
 	{
 		if (ft_strlen(grid[i]) == 0 || ft_strlen(grid[i]) != vars->map.width)
 			return (-1);
 		j = 0;
 		while (grid[i][j])
 		{
-			if ((i == 0 || i == var->map.width - 1 || j == 0
-					|| j == vars->map.height - 1) && grid[i][j] != '1')
-				return (-1);
-			if (grid[i][j] == 'P' && count_p == 0)
-				count_p = 1;
-			else if (grid[i][j] == 'P' || !(grid[i] == '1' || grid[i][j] == '0'
-				|| grid[i][j] == 'C' || grid[i][j] == 'E'))
+			if (ft_count_map(i, j, &count_p, vars) == -1)
 				return (-1);
 			j ++;
 		}
+		i ++;
 	}
+	if (vars->collect.count == 0 || vars->exit.count == 0 || count_p != 1)
+		return (-1);
 	return (0);
 }
 

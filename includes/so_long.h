@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:58:38 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/07 15:03:01 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/07 17:51:35 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,11 @@ typedef struct s_hero
 	int		y;
 }				t_hero;
 
-typedef struct s_collect
+typedef struct s_other
 {
 	int	count;
 	int	**int	pos;
-}				t_collect;
-
-typedef struct s_exit
-{
-	int	count;
-	int	**int	pos;
-}				t_exit;
+}				t_other;
 
 typedef struct s_vars {
 	void		*mlx;
@@ -76,8 +70,8 @@ typedef struct s_vars {
 	t_img		wall;
 	t_img		bg;
 	t_hero		hero;
-	t_collect	collect;
-	t_exit		exit;
+	t_other	collect;
+	t_other		exit;
 }				t_vars;
 
 int		key_release(int keycode, t_vars *vars);
