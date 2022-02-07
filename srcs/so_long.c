@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:31:55 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/02 15:45:47 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/07 14:17:30 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,6 @@ void	img_pix_put(t_img *img, int x, int y, char *color)
 		color ++;
 		i += 8;
 	}
-	/*while (i >= 0)
-	{
-		big endian, MSB is the leftmost bit
-		if (img->endian != 0)
-			*pixel++ = (color >> i) & 0xFF;
-		little endian, LSB is the leftmost bit
-		else
-			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
-		i -= 8;
-	}*/
 }
 
 void	render_tile(t_vars *vars, t_img tile, int i, int j)
@@ -64,7 +54,8 @@ void	render_tile(t_vars *vars, t_img tile, int i, int j)
 		while (y < tile.height)
 		{
 			pixel = tile.addr + (y * tile.line_len + x * (tile.bpp / 8));
-			img_pix_put(&vars->bg, x + i * tile.width, y + j * tile.height, pixel);
+			img_pix_put(&vars->bg, x + i * tile.width,
+				y + j * tile.height, pixel);
 			y ++;
 		}
 		x ++;
@@ -84,7 +75,8 @@ void	render_img(t_vars *vars, t_img tile, int i, int j)
 		while (y < tile.height)
 		{
 			pixel = tile.addr + (y * tile.line_len + x * (tile.bpp / 8));
-			img_pix_put(&vars->img, x + i * tile.width, y + j * tile.height, pixel);
+			img_pix_put(&vars->img, x + i * tile.width,
+				y + j * tile.height, pixel);
 			y ++;
 		}
 		x ++;
@@ -149,22 +141,12 @@ int	main(int ac, char ** av)
 		free(vars.mlx);
 		return (-1);
 	}
-	vars.floor.mlx_img = mlx_xpm_file_to_image (vars.mlx, "./assets/grass.xpm", &vars.floor.width, &vars.floor.height);
-	vars.wall.mlx_img = mlx_xpm_file_to_image (vars.mlx, "./assets/tree.xpm", &vars.wall.width, &vars.wall.height);
-	vars.bg.width = vars.floor.width * vars.map.width;
-	vars.bg.height = vars.floor.height * vars.map.height;
-	vars.img.width = vars.floor.width * vars.map.width;
-	vars.img.height = vars.floor.height * vars.map.height;
-	vars.bg.mlx_img = mlx_new_image(vars.mlx, vars.bg.width,  vars.bg.height);
-	vars.img.mlx_img = mlx_new_image(vars.mlx, vars.img.width,  vars.img.height);
-	vars.img.addr = mlx_get_data_addr(vars.img.mlx_img, &vars.img.bpp,
-			&vars.img.line_len, &vars.img.endian);
-	vars.bg.addr = mlx_get_data_addr(vars.bg.mlx_img, &vars.bg.bpp,
-			&vars.bg.line_len, &vars.bg.endian);
-	vars.floor.addr = mlx_get_data_addr(vars.floor.mlx_img, &vars.floor.bpp,
-			&vars.floor.line_len, &vars.floor.endian);
-	vars.wall.addr = mlx_get_data_addr(vars.wall.mlx_img, &vars.wall.bpp,
-			&vars.wall.line_len, &vars.wall.endian);
+	ret = ft_set_img(&vars);
+	if (ret == -1)
+	{
+		printf("Eroor\nCouldn't process images\n");
+		return (-1);
+	}
 	render_bg(&vars);
 	mlx_key_hook(vars.win, key_release, &vars);
 	mlx_loop_hook(vars.mlx, render, &vars);

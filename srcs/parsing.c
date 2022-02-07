@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/02 17:29:18 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/07 16:09:57 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_read_grid(int fd)
 {
 	t_list	*first;
 	t_list	*line;
-	
+
 	first = NULL;
 	line = ft_lstnew(get_next_line(fd));
 	while (line->content)
@@ -28,17 +28,15 @@ t_list	*ft_read_grid(int fd)
 	return (first);
 }
 
-int ft_parse_grid(t_list **first, t_vars *vars)
+int	ft_parse_grid(t_list **first, t_vars *vars)
 {
 	t_list	*line;
 	int		i;
-	char	**grid;
 
 	vars->map.height = ft_lstsize(*first);
-	grid = malloc(sizeof(char *) * (vars->map.height + 1));
-	if (!grid)
+	vars->map.grid = malloc(sizeof(char *) * (vars->map.height + 1));
+	if (!(vars->map.grid))
 	{
-		printf("Error\nCouldn't allocate map\n");
 		ft_lstclear(first, &free);
 		return (-1);
 	}
@@ -46,46 +44,89 @@ int ft_parse_grid(t_list **first, t_vars *vars)
 	i = 0;
 	while (line)
 	{
-		grid[i] = ft_strdup((char *)(line->content));
+		vars->map.grid[i] = ft_strdup((char *)(line->content));
+		if (vars->map.grid[i][ft_strlen(vars->map.grid[i])] == '\n')
+			vars->map.grid[i][ft_strlen(vars->map.grid[i])] = '\0';
 		line = line->next;
 		i ++;
 	}
-	grid[i] = NULL;
-	vars->map.grid = grid;
-	vars->map.width = ft_strlen(grid[0]) - 1;
+	vars->map.grid[i] = NULL;
+	vars->map.width = ft_strlen(vars->map.grid[0]);
 	ft_lstclear(first, &free);
+	return (0);
+}
+
+int	ft_check_map(t_vars *vars, char **grid)
+{
+	int	i;
+	int	j;
+	int	count_p;
+
+	i = -1;
+	count_p = 0;
+	while (grid[i++])
+	{
+		if (ft_strlen(grid[i]) == 0 || ft_strlen(grid[i]) != vars->map.width)
+			return (-1);
+		j = 0;
+		while (grid[i][j])
+		{
+			if ((i == 0 || i == var->map.width - 1 || j == 0
+					|| j == vars->map.height - 1) && grid[i][j] != '1')
+				return (-1);
+			if (grid[i][j] == 'P' && count_p == 0)
+				count_p = 1;
+			else if (grid[i][j] == 'P' || !(grid[i] == '1' || grid[i][j] == '0'
+				|| grid[i][j] == 'C' || grid[i][j] == 'E'))
+				return (-1);
+			j ++;
+		}
+	}
+	return (0);
+}
+
+int	ft_set_map(int fd, t_vars *vars)
+{
+	t_list	*lst_grid;
+	int		ret;
+
+	lst_grid = ft_read_grid(fd);
+	ret = ft_parse_grid(&lst_grid, vars);
+	if (ret == -1 || !vars->map.grid[0])
+	{
+		printf("Error\nCouldn't read map\n");
+		return (-1);
+	}
+	ret = ft_check_map(vars, vars->map.grid);
+	if (ret == -1)
+	{
+		printf("Error\nInvalid map\n");
+		return (-1);
+	}
 	return (0);
 }
 
 int	ft_build_map(char *m_path, t_vars *vars)
 {
 	int		fd;
-	t_list	*lst_grid;
 	int		ret;
 
+	ret = ft_strlen(m_path);
 	fd = open(m_path, O_RDONLY);
-	if (fd == -1)
+	if (fd == -1 || m_path[ret - 4] != '.' || m_path[ret - 3] != 'b'
+		|| m_path[ret - 2] != 'e' || m_path[ret - 1] != 'r')
 	{
-		printf("Error\nCan't open file %s\n.", m_path);
+		printf("Error\nInvalid file %s\n.", m_path);
 		return (-1);
 	}
-	lst_grid = ft_read_grid(fd);
-	if (!lst_grid)
-	{
-		printf("Error\nCouldn't read map\n");
-		return (-1);
-	}
-	ret = ft_parse_grid(&lst_grid, vars);
-	if(ret == -1)
-	{
-		printf("Error\nCouldn't read map\n");
-		return (-1);
-	}
+	ret = ft_set_map(fd, vars);
 	fd = close(fd);
 	if (fd == -1)
 	{
 		printf("Error\nCan't close file %s.\n", m_path);
 		return (-1);
 	}
+	if (ret == -1)
+		return (-1);
 	return (0);
 }

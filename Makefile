@@ -6,13 +6,13 @@
 #    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 11:37:43 by mriant            #+#    #+#              #
-#    Updated: 2022/02/02 17:51:36 by mriant           ###   ########.fr        #
+#    Updated: 2022/02/07 13:36:14 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-SRCS = $(addprefix ./srcs/, so_long.c get_next_line.c get_next_line_utils.c parsing.c)
+SRCS = $(addprefix ./srcs/, so_long.c get_next_line.c get_next_line_utils.c parsing.c init_img.C init_addr.c)
 
 OBJS = ${SRCS:.c=.o}
 

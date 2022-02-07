@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:58:38 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/02 17:04:47 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/07 15:03:01 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,29 @@ typedef struct s_hero
 	int		y;
 }				t_hero;
 
+typedef struct s_collect
+{
+	int	count;
+	int	**int	pos;
+}				t_collect;
+
+typedef struct s_exit
+{
+	int	count;
+	int	**int	pos;
+}				t_exit;
+
 typedef struct s_vars {
-	void	*mlx;
-	void	*win;
-	t_map	map;
-	t_img	img;
-	t_img	floor;
-	t_img	wall;
-	t_img	bg;
-	t_hero	hero;
+	void		*mlx;
+	void		*win;
+	t_map		map;
+	t_img		img;
+	t_img		floor;
+	t_img		wall;
+	t_img		bg;
+	t_hero		hero;
+	t_collect	collect;
+	t_exit		exit;
 }				t_vars;
 
 int		key_release(int keycode, t_vars *vars);
@@ -72,5 +86,6 @@ void	img_pix_put(t_img *img, int x, int y, char *color);
 void	render_bg(t_vars *vars);
 int		render(t_vars *vars);
 int		ft_build_map(char *m_path, t_vars *vars);
+int		ft_set_img(t_vars *vars);
 
 #endif
