@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/07 17:26:08 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 10:24:35 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ int	ft_parse_grid(t_list **first, t_vars *vars)
 	return (0);
 }
 
-int	ft_check_map1(t_vars *vars, char **grid)
+int	ft_check_map(t_vars *vars, char **grid)
 {
 	int	i;
+	int	j;
 	int	count_p;
 
 	i = 0;
@@ -70,7 +71,7 @@ int	ft_check_map1(t_vars *vars, char **grid)
 		j = 0;
 		while (grid[i][j])
 		{
-			if (ft_count_map(i, j, &count_p, vars) == -1)
+			if (ft_count_assets(i, j, &count_p, vars) == -1)
 				return (-1);
 			j ++;
 		}

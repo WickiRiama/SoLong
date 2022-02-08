@@ -6,13 +6,13 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:12:15 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/07 17:32:24 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 10:14:27 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_count_map(int i, int j, char *p, t_vars *vars)
+int	ft_count_assets(int i, int j, int *p, t_vars *vars)
 {
 	if ((i == 0 || i == var->map.width - 1 || j == 0
 			|| j == vars->map.height - 1) && c != '1')

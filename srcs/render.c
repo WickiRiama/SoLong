@@ -6,13 +6,13 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:56:12 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/07 17:57:25 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 10:22:21 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	img_pix_put(t_img *img, int x, int y, char *color)
+void	ft_img_pix_put(t_img *img, int x, int y, char *color)
 {
 	char	*pixel;
 	int		i;
@@ -28,7 +28,7 @@ void	img_pix_put(t_img *img, int x, int y, char *color)
 	}
 }
 
-void	render_tile(t_vars *vars, t_img tile, int i, int j)
+void	ft_render_tile(t_vars *vars, t_img tile, int i, int j)
 {
 	int		x;
 	int		y;
@@ -49,7 +49,7 @@ void	render_tile(t_vars *vars, t_img tile, int i, int j)
 	}
 }
 
-void	render_img(t_vars *vars, t_img tile, int i, int j)
+void	ft_render_img(t_vars *vars, t_img tile, int i, int j)
 {
 	int		x;
 	int		y;
@@ -70,7 +70,7 @@ void	render_img(t_vars *vars, t_img tile, int i, int j)
 	}
 }
 
-void	render_bg(t_vars *vars)
+void	ft_render_bg(t_vars *vars)
 {
 	int		i;
 	int		j;
@@ -91,7 +91,7 @@ void	render_bg(t_vars *vars)
 	}
 }
 
-int	render(t_vars *vars)
+int	ft_render(t_vars *vars)
 {
 	if (vars->win)
 	{

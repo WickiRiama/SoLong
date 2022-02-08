@@ -6,13 +6,13 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:31:55 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/07 18:12:02 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 10:23:44 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	key_release(int keycode, t_vars *vars)
+int	ft_key_release(int keycode, t_vars *vars)
 {
 	if (keycode == 65307)
 		mlx_loop_end(vars->mlx);
@@ -39,7 +39,7 @@ void	ft_clean_all(t_vars *vars)
 	free(vars->map.grid);
 }
 
-int	ft_preloop(t_vars *vars)
+int	ft_preloop(t_vars *vars, char **av)
 {
 	if (ft_build_map(av[1], vars) == -1)
 		return (-1);
@@ -61,7 +61,7 @@ int	ft_preloop(t_vars *vars)
 		printf("Eroor\nCouldn't process images\n");
 		return (-1);
 	}
-	render_bg(vars);
+	ft_render_bg(vars);
 	return (0);
 }
 
@@ -75,11 +75,11 @@ int	main(int ac, char **av)
 		printf("Error\nPass the path to the map as argument.\n");
 		return (-1);
 	}
-	ret = ft_preloop(&vars);
+	ret = ft_preloop(&vars, av);
 	if (ret == -1)
 		return (-1);
-	mlx_key_hook(vars.win, key_release, &vars);
-	mlx_loop_hook(vars.mlx, render, &vars);
+	mlx_key_hook(vars.win, ft_key_release, &vars);
+	mlx_loop_hook(vars.mlx, ft_render, &vars);
 	mlx_hook(vars.win, 17, 0, mlx_loop_end, &vars);
 	mlx_loop(vars.mlx);
 	ft_clean_all(&vars);

@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:58:38 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/07 17:51:35 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 10:26:04 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_img
 typedef struct s_map
 {
 	char	**grid;
-	int		width;
-	int		height;
+	size_t	width;
+	size_t	height;
 }				t_map;
 
 typedef struct s_hero
@@ -58,7 +58,7 @@ typedef struct s_hero
 typedef struct s_other
 {
 	int	count;
-	int	**int	pos;
+	int	**pos;
 }				t_other;
 
 typedef struct s_vars {
@@ -70,16 +70,37 @@ typedef struct s_vars {
 	t_img		wall;
 	t_img		bg;
 	t_hero		hero;
-	t_other	collect;
+	t_other		collect;
 	t_other		exit;
 }				t_vars;
 
-int		key_release(int keycode, t_vars *vars);
-int		closex(t_vars *vars);
-void	img_pix_put(t_img *img, int x, int y, char *color);
-void	render_bg(t_vars *vars);
-int		render(t_vars *vars);
+int		ft_addr_hero1(t_hero *hero);
+int		ft_addr_hero2(t_hero *hero);
+int		ft_addr_tiles(t_vars *vars);
 int		ft_build_map(char *m_path, t_vars *vars);
+int		ft_check_map(t_vars *vars, char **grid);
+void	ft_clean_all(t_vars *vars);
+int		ft_count_assets(int i, int j, int *p, t_vars *vars);
+void	ft_img_pix_put(t_img *img, int x, int y, char *color);
+int		ft_init_bg(t_vars *vars);
+int		ft_init_hero1(t_hero *hero);
+int		ft_init_hero2(t_hero hero);
+void	ft_init_pos(t_vars *vars);
+void	ft_init_struct(t_vars *vars);
+int		ft_init_tiles(t_vars vars);
+int		ft_key_release(int keycode, t_vars *vars);
+void	ft_null_hero(t_hero *hero);
+void	ft_null_img(t_img *img);
+void	ft_null_map(t_map *map);
+void	ft_null_other(t_other *other);
+int		ft_parse_grid(t_list **first, t_vars *vars);
+int		ft_preloop(t_vars *vars, char **av);
+t_list	*ft_read_grid(int fd);
+int		ft_render(t_vars *vars);
+void	ft_render_bg(t_vars *vars);
+void	ft_render_img(t_vars *vars, t_img tile, int i, int j);
+void	ft_render_tile(t_vars *vars, t_img tile, int i, int j);
 int		ft_set_img(t_vars *vars);
+int		ft_set_map(int fd, t_vars *vars);
 
 #endif
