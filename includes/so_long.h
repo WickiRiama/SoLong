@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:58:38 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 12:10:27 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 14:46:50 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,9 @@ typedef struct s_map
 typedef struct s_hero
 {
 	t_img	front[3];
-	//t_img	front_1;
-	//t_img	front_2;
 	t_img	back[3];
-	//t_img	back_1;
-	//t_img	back_2;
 	t_img	left[3];
-	//t_img	left_1;
-	//t_img	left_2;
 	t_img	right[3];
-	//t_img	right_1;
-	//t_img	right_2;
 	int		x;
 	int		y;
 }				t_hero;

@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:31:55 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 10:23:44 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 14:39:16 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_clean_all(t_vars *vars)
 
 int	ft_preloop(t_vars *vars, char **av)
 {
+	ft_init_struct(vars);
 	if (ft_build_map(av[1], vars) == -1)
 		return (-1);
 	vars->mlx = mlx_init();
@@ -79,8 +80,8 @@ int	main(int ac, char **av)
 	if (ret == -1)
 		return (-1);
 	mlx_key_hook(vars.win, ft_key_release, &vars);
+	mlx_hook(vars.win, 17, 0, mlx_loop_end, (&vars)->mlx);
 	mlx_loop_hook(vars.mlx, ft_render, &vars);
-	mlx_hook(vars.win, 17, 0, mlx_loop_end, &vars);
 	mlx_loop(vars.mlx);
 	ft_clean_all(&vars);
 	return (0);

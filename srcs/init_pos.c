@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:12:15 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 12:09:53 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 14:44:58 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,21 @@ int	ft_count_assets(unsigned int i, unsigned int j, int *p, t_vars *vars)
 	char	c;
 
 	c = vars->map.grid[i][j];
-	if ((i == 0 || i == vars->map.width - 1 || j == 0
-			|| j == vars->map.height - 1) && c != '1')
+	if ((i == 0 || i == vars->map.height - 1 || j == 0
+			|| j == vars->map.width - 1) && c != '1')
 		return (-1);
-	if (!(c == '1' || c == '0' || c == 'C' || c == 'E'))
+	if (!(c == '1' || c == '0' || c == 'C' || c == 'E' || c == 'P'))
 		return (-1);
 	if (c == 'E')
 		vars->exit.count ++;
 	if (c == 'C')
 		vars->collect.count ++;
 	if (c == 'P')
+	{
 		(*p)++;
-	j ++;
+		vars->hero.x = j;
+		vars->hero.y = i;
+	}
 	return (0);
 }
 

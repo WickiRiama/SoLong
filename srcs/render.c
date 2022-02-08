@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:56:12 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 12:18:27 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 14:42:16 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	ft_img_pix_put(t_img *img, int x, int y, char *color)
 	i = 0;
 	while (i < img->bpp)
 	{
-		*pixel = *color;
+		if (*color)
+			*pixel = *color;
 		pixel ++;
 		color ++;
 		i += 8;
@@ -96,7 +97,7 @@ int	ft_render(t_vars *vars)
 	if (vars->win)
 	{
 		ft_render_img(vars, vars->bg, 0, 0);
-		//ft_render_img(vars, vars->hero.front0, vars->hero.x, vars->hero.y);
+		ft_render_img(vars, vars->hero.front[0], vars->hero.x, vars->hero.y);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->img.mlx_img, 0, 0);
 	}
 	return (0);

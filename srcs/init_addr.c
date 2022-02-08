@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 13:36:46 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 12:03:12 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 14:35:30 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,15 @@ int	ft_set_img(t_vars *vars)
 	ret1 = ft_init_tiles(vars);
 	ret2 = ft_init_hero1(vars, &(vars->hero));
 	ret3 = ft_init_hero2(vars, &(vars->hero));
-	if (!(ret1 && ret2 && ret3))
+	if (ret1 == -1 || ret2 == -1 || ret3 == -1)
 		return (-1);
 	ret1 = ft_init_bg(vars);
-	if (!ret1)
+	if (ret1 == -1)
 		return (-1);
 	ret1 = ft_addr_tiles(vars);
 	ret2 = ft_addr_hero1(&(vars->hero));
 	ret3 = ft_addr_hero2(&(vars->hero));
-	if (!(ret1 && ret2 && ret3))
+	if (ret1 == -1 || ret2 == -1 || ret3 == -1)
 		return (-1);
 	return (0);
 }

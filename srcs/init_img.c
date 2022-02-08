@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 11:01:48 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 12:02:52 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 14:47:47 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_init_hero2(t_vars *vars, t_hero *hero)
 			"./assets/right2.xpm", &hero->right[2].width,
 			&hero->right[2].height);
 	if (!(hero->left[0].mlx_img && hero->left[1].mlx_img
-			&& hero->left[2].mlx_img && hero->right[0].mlx_img 
+			&& hero->left[2].mlx_img && hero->right[0].mlx_img
 			&& hero->right[1].mlx_img && hero->right[2].mlx_img))
 		return (-1);
 	return (0);
