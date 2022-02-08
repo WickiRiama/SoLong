@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 11:01:48 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 15:34:20 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 20:37:21 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_init_tiles(t_vars *vars)
 			"./assets/marble.xpm", &vars->collect.img.width,
 			&vars->collect.img.height);
 	vars->exit.img.mlx_img = mlx_xpm_file_to_image (vars->mlx,
-			"./assets/marble.xpm", &vars->exit.img.width,
+			"./assets/cdoor.xpm", &vars->exit.img.width,
 			&vars->exit.img.height);
 	if (!(vars->floor.mlx_img && vars->wall.mlx_img && vars->collect.img.mlx_img
 			&& vars->exit.img.mlx_img))
