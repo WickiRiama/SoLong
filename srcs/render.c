@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:56:12 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 14:42:16 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 15:42:40 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,18 @@ void	ft_render_bg(t_vars *vars)
 
 int	ft_render(t_vars *vars)
 {
+	int	i;
+
 	if (vars->win)
 	{
 		ft_render_img(vars, vars->bg, 0, 0);
+		i = 0;
+		while (i < vars->collect.count)
+		{
+			ft_render_img(vars, vars->collect.img, vars->collect.x[i],
+				vars->collect.y[i]);
+			i ++;
+		}
 		ft_render_img(vars, vars->hero.front[0], vars->hero.x, vars->hero.y);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->img.mlx_img, 0, 0);
 	}

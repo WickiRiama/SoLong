@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:12:15 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 14:44:58 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 15:22:24 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,51 @@ int	ft_count_assets(unsigned int i, unsigned int j, int *p, t_vars *vars)
 	return (0);
 }
 
-void	ft_init_pos(t_vars *vars)
+int	ft_alloc_pos(t_vars *vars)
+{
+	vars->collect.x = malloc(sizeof(int) * vars->collect.count);
+	vars->collect.y = malloc(sizeof(int) * vars->collect.count);
+	vars->exit.x = malloc(sizeof(int) * vars->exit.count);
+	vars->exit.y = malloc(sizeof(int) * vars->exit.count);
+	if (!(vars->collect.x && vars->collect.y && vars->exit.x && vars->exit.y))
+	{
+		printf("Error\nMalloc error\n");
+		return (-1);
+	}
+	return (0);
+}
+
+void	ft_set_pos(t_other *other, int i, int j, int *n)
+{
+	other->x[*n] = j;
+	other->y[*n] = i;
+	(*n)++;
+}
+
+int	ft_init_pos(t_vars *vars)
 {
 	int	i;
 	int	j;
+	int	c;
+	int	e;
 
 	i = 0;
+	c = 0;
+	e = 0;
+	if (ft_alloc_pos(vars) == -1)
+		return (-1);
 	while (vars->map.grid[i])
 	{
 		j = 0;
 		while (vars->map.grid[i][j])
 		{
-			if (vars->map.grid[i][j] == 'P')
-			{
-				vars->hero.x = j;
-				vars->hero.y = i;
-			}
 			if (vars->map.grid[i][j] == 'C')
-				vars->collect.count ++;
+				ft_set_pos(&vars->collect, i, j, &c);
 			if (vars->map.grid[i][j] == 'E')
-				vars->exit.count ++;
+				ft_set_pos(&vars->exit, i, j, &e);
+			j ++;
 		}
+		i ++;
 	}
+	return (0);
 }

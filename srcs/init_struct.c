@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:33:20 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 12:16:38 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 15:29:42 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ void	ft_null_hero(t_hero *hero)
 void	ft_null_other(t_other *other)
 {
 	other->count = 0;
-	other->pos = NULL;
+	other->x = NULL;
+	other->y = NULL;
+	ft_null_img(&other->img);
 }
 
 void	ft_init_struct(t_vars *vars)

@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:58:38 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 14:46:50 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 15:38:15 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ typedef struct s_hero
 
 typedef struct s_other
 {
-	int	count;
-	int	**pos;
+	int		count;
+	int		*x;
+	int		*y;
+	t_img	img;
 }				t_other;
 
 typedef struct s_vars {
@@ -69,6 +71,7 @@ typedef struct s_vars {
 int		ft_addr_hero1(t_hero *hero);
 int		ft_addr_hero2(t_hero *hero);
 int		ft_addr_tiles(t_vars *vars);
+int		ft_alloc_pos(t_vars *vars);
 int		ft_build_map(char *m_path, t_vars *vars);
 int		ft_check_map(t_vars *vars, char **grid);
 void	ft_clean_all(t_vars *vars);
@@ -77,7 +80,7 @@ void	ft_img_pix_put(t_img *img, int x, int y, char *color);
 int		ft_init_bg(t_vars *vars);
 int		ft_init_hero1(t_vars *vars, t_hero *hero);
 int		ft_init_hero2(t_vars *vars, t_hero *hero);
-void	ft_init_pos(t_vars *vars);
+int		ft_init_pos(t_vars *vars);
 void	ft_init_struct(t_vars *vars);
 int		ft_init_tiles(t_vars *vars);
 int		ft_key_release(int keycode, t_vars *vars);
@@ -94,5 +97,6 @@ void	ft_render_img(t_vars *vars, t_img tile, int i, int j);
 void	ft_render_tile(t_vars *vars, t_img tile, int i, int j);
 int		ft_set_img(t_vars *vars);
 int		ft_set_map(int fd, t_vars *vars);
+void	ft_set_pos(t_other *other, int i, int j, int *n);
 
 #endif
