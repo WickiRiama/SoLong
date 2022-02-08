@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:33:20 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/07 17:55:21 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 12:16:38 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@ void	ft_null_img(t_img *img)
 
 void	ft_null_hero(t_hero *hero)
 {
-	hero->front_0 = NULL;
-	hero->front_1 = NULL;
-	hero->front_2 = NULL;
-	hero->back_0 = NULL;
-	hero->back_1 = NULL;
-	hero->back_2 = NULL;
-	hero->left_0 = NULL;
-	hero->left_1 = NULL;
-	hero->left_2 = NULL;
-	hero->right_0 = NULL;
-	hero->right_1 = NULL;
-	hero->right_2 = NULL;
+	ft_null_img(&hero->front[0]);
+	ft_null_img(&hero->front[1]);
+	ft_null_img(&hero->front[2]);
+	ft_null_img(&hero->back[0]);
+	ft_null_img(&hero->back[1]);
+	ft_null_img(&hero->back[2]);
+	ft_null_img(&hero->left[0]);
+	ft_null_img(&hero->left[1]);
+	ft_null_img(&hero->left[2]);
+	ft_null_img(&hero->right[0]);
+	ft_null_img(&hero->right[1]);
+	ft_null_img(&hero->right[2]);
 	hero->x = 0;
 	hero->y = 0;
 }

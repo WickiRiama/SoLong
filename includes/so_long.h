@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:58:38 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 10:26:04 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 12:10:27 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,18 @@ typedef struct s_map
 
 typedef struct s_hero
 {
-	t_img	front_0;
-	t_img	front_1;
-	t_img	front_2;
-	t_img	back_0;
-	t_img	back_1;
-	t_img	back_2;
-	t_img	left_0;
-	t_img	left_1;
-	t_img	left_2;
-	t_img	right_0;
-	t_img	right_1;
-	t_img	right_2;
+	t_img	front[3];
+	//t_img	front_1;
+	//t_img	front_2;
+	t_img	back[3];
+	//t_img	back_1;
+	//t_img	back_2;
+	t_img	left[3];
+	//t_img	left_1;
+	//t_img	left_2;
+	t_img	right[3];
+	//t_img	right_1;
+	//t_img	right_2;
 	int		x;
 	int		y;
 }				t_hero;
@@ -80,14 +80,14 @@ int		ft_addr_tiles(t_vars *vars);
 int		ft_build_map(char *m_path, t_vars *vars);
 int		ft_check_map(t_vars *vars, char **grid);
 void	ft_clean_all(t_vars *vars);
-int		ft_count_assets(int i, int j, int *p, t_vars *vars);
+int		ft_count_assets(unsigned int i, unsigned int j, int *p, t_vars *vars);
 void	ft_img_pix_put(t_img *img, int x, int y, char *color);
 int		ft_init_bg(t_vars *vars);
-int		ft_init_hero1(t_hero *hero);
-int		ft_init_hero2(t_hero hero);
+int		ft_init_hero1(t_vars *vars, t_hero *hero);
+int		ft_init_hero2(t_vars *vars, t_hero *hero);
 void	ft_init_pos(t_vars *vars);
 void	ft_init_struct(t_vars *vars);
-int		ft_init_tiles(t_vars vars);
+int		ft_init_tiles(t_vars *vars);
 int		ft_key_release(int keycode, t_vars *vars);
 void	ft_null_hero(t_hero *hero);
 void	ft_null_img(t_img *img);

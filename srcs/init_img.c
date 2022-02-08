@@ -6,13 +6,13 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 11:01:48 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/07 13:50:23 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 12:02:52 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_init_tiles(t_vars vars)
+int	ft_init_tiles(t_vars *vars)
 {
 	vars->floor.mlx_img = mlx_xpm_file_to_image (vars->mlx,
 			"./assets/grass.xpm", &vars->floor.width, &vars->floor.height);
@@ -23,44 +23,50 @@ int	ft_init_tiles(t_vars vars)
 	return (0);
 }
 
-int	ft_init_hero1(t_hero *hero)
+int	ft_init_hero1(t_vars *vars, t_hero *hero)
 {
-	hero->front0.mlx_img = mlx_xpm_file_to_image (vars->heromlx,
-			"./assets/front0.xpm", &hero->front0.width, &hero->front0.height);
-	hero->front1.mlx_img = mlx_xpm_file_to_image (hero->mlx,
-			"./assets/front1.xpm", &hero->front1.width, &hero->front1.height);
-	hero->front2.mlx_img = mlx_xpm_file_to_image (hero->mlx,
-			"./assets/front2.xpm", &hero->front2.width, &hero->front2.height);
-	hero->back0.mlx_img = mlx_xpm_file_to_image (hero->mlx,
-			"./assets/back0.xpm", &hero->back0.width, &hero->back0.height);
-	hero->back1.mlx_img = mlx_xpm_file_to_image (hero->mlx,
-			"./assets/back1.xpm", &hero->back1.width, &hero->back1.height);
-	hero->back2.mlx_img = mlx_xpm_file_to_image (hero->mlx,
-			"./assets/back2.xpm", &hero->back2.width, &hero->back2.height);
-	if (!(hero->front0.mlx_img && hero->front1.mlx_img && hero->front2.mlx_img
-			&& hero->back0.mlx_img && hero->back1.mlx_img
-			&& hero->back2.mlx_img))
+	hero->front[0].mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/front0.xpm", &hero->front[0].width,
+			&hero->front[0].height);
+	hero->front[1].mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/front1.xpm", &hero->front[1].width,
+			&hero->front[1].height);
+	hero->front[2].mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/front2.xpm", &hero->front[2].width,
+			&hero->front[2].height);
+	hero->back[0].mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/back0.xpm", &hero->back[0].width, &hero->back[0].height);
+	hero->back[1].mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/back1.xpm", &hero->back[1].width, &hero->back[1].height);
+	hero->back[2].mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/back2.xpm", &hero->back[2].width, &hero->back[2].height);
+	if (!(hero->front[0].mlx_img && hero->front[1].mlx_img
+			&& hero->front[2].mlx_img && hero->back[0].mlx_img
+			&& hero->back[1].mlx_img && hero->back[2].mlx_img))
 		return (-1);
 	return (0);
 }
 
-int	ft_init_hero2(t_hero hero)
+int	ft_init_hero2(t_vars *vars, t_hero *hero)
 {
-	hero->left0.mlx_img = mlx_xpm_file_to_image (hero->mlx,
-			"./assets/left0.xpm", &hero->left0.width, &hero->left0.height);
-	hero->left1.mlx_img = mlx_xpm_file_to_image (hero->mlx,
-			"./assets/left1.xpm", &hero->left1.width, &hero->left1.height);
-	hero->left2.mlx_img = mlx_xpm_file_to_image (hero->mlx,
-			"./assets/left2.xpm", &hero->left2.width, &hero->left2.height);
-	hero->right0.mlx_img = mlx_xpm_file_to_image (hero->mlx,
-			"./assets/left0.xpm", &hero->right0.width, &hero->right0.height);
-	hero->right1.mlx_img = mlx_xpm_file_to_image (hero->mlx,
-			"./assets/left1.xpm", &hero->right1.width, &hero->right1.height);
-	hero->right2.mlx_img = mlx_xpm_file_to_image (hero->mlx,
-			"./assets/left2.xpm", &hero->right2.width, &hero->right2.height);
-	if (!(hero->left0.mlx_img && hero->left1.mlx_img && hero->left2.mlx_img
-			&& hero->right0.mlx_img && hero->right1.mlx_img
-			&& hero->right2.mlx_img))
+	hero->left[0].mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/left0.xpm", &hero->left[0].width, &hero->left[0].height);
+	hero->left[1].mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/left1.xpm", &hero->left[1].width, &hero->left[1].height);
+	hero->left[2].mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/left2.xpm", &hero->left[2].width, &hero->left[2].height);
+	hero->right[0].mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/right0.xpm", &hero->right[0].width,
+			&hero->right[0].height);
+	hero->right[1].mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/right1.xpm", &hero->right[1].width,
+			&hero->right[1].height);
+	hero->right[2].mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/right2.xpm", &hero->right[2].width,
+			&hero->right[2].height);
+	if (!(hero->left[0].mlx_img && hero->left[1].mlx_img
+			&& hero->left[2].mlx_img && hero->right[0].mlx_img 
+			&& hero->right[1].mlx_img && hero->right[2].mlx_img))
 		return (-1);
 	return (0);
 }

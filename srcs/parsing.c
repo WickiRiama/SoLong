@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 10:24:35 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 12:25:32 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	ft_parse_grid(t_list **first, t_vars *vars)
 	while (line)
 	{
 		vars->map.grid[i] = ft_strdup((char *)(line->content));
-		if (vars->map.grid[i][ft_strlen(vars->map.grid[i])] == '\n')
-			vars->map.grid[i][ft_strlen(vars->map.grid[i])] = '\0';
+		if (vars->map.grid[i][ft_strlen(vars->map.grid[i]) - 1] == '\n')
+			vars->map.grid[i][ft_strlen(vars->map.grid[i]) - 1] = '\0';
 		line = line->next;
 		i ++;
 	}

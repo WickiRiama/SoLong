@@ -6,15 +6,18 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:12:15 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 10:14:27 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/08 12:09:53 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_count_assets(int i, int j, int *p, t_vars *vars)
+int	ft_count_assets(unsigned int i, unsigned int j, int *p, t_vars *vars)
 {
-	if ((i == 0 || i == var->map.width - 1 || j == 0
+	char	c;
+
+	c = vars->map.grid[i][j];
+	if ((i == 0 || i == vars->map.width - 1 || j == 0
 			|| j == vars->map.height - 1) && c != '1')
 		return (-1);
 	if (!(c == '1' || c == '0' || c == 'C' || c == 'E'))
