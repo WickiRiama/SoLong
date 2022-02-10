@@ -6,18 +6,20 @@
 #    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 11:37:43 by mriant            #+#    #+#              #
-#    Updated: 2022/02/08 10:40:00 by mriant           ###   ########.fr        #
+#    Updated: 2022/02/10 18:08:58 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-SRCS = $(addprefix ./srcs/, get_next_line.c \
+SRCS = $(addprefix ./srcs/, digits.c \
+	get_next_line.c \
 	get_next_line_utils.c \
 	init_addr.c \
 	init_img.c \
 	init_pos.c \
 	init_struct.c \
+	keys.c \
 	parsing.c \
 	render.c \
 	so_long.c )

@@ -6,18 +6,12 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:31:55 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 15:04:30 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/10 16:10:30 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// z:122 q:113 s:s:115 d:100
 #include "so_long.h"
-
-int	ft_key_release(int keycode, t_vars *vars)
-{
-	if (keycode == 65307)
-		mlx_loop_end(vars->mlx);
-	return (0);
-}
 
 void	ft_clean_all(t_vars *vars)
 {
@@ -51,7 +45,7 @@ int	ft_preloop(t_vars *vars, char **av)
 		return (-1);
 	}
 	vars->win = mlx_new_window(vars->mlx, vars->map.width * 48,
-			vars->map.height * 48, "So long");
+			(vars->map.height + 1) * 48, "Granny lost her marbles");
 	if (!(vars->win))
 	{
 		printf("Error\nCould'nt initialize window\n");
@@ -79,8 +73,9 @@ int	main(int ac, char **av)
 	ret = ft_preloop(&vars, av);
 	if (ret == -1)
 		return (-1);
-	mlx_key_hook(vars.win, ft_key_release, &vars);
 	mlx_hook(vars.win, 17, 0, mlx_loop_end, (&vars)->mlx);
+	mlx_hook(vars.win, 02, (1L << 0), ft_key_press, &vars);
+	mlx_key_hook(vars.win, ft_key_release, &vars);
 	mlx_loop_hook(vars.mlx, ft_render, &vars);
 	mlx_loop(vars.mlx);
 	ft_clean_all(&vars);

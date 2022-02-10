@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:33:20 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 15:29:42 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/10 16:56:56 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_null_hero(t_hero *hero)
 	ft_null_img(&hero->right[0]);
 	ft_null_img(&hero->right[1]);
 	ft_null_img(&hero->right[2]);
+	hero->current = NULL;
 	hero->x = 0;
 	hero->y = 0;
 }
@@ -51,20 +52,26 @@ void	ft_null_hero(t_hero *hero)
 void	ft_null_other(t_other *other)
 {
 	other->count = 0;
+	other->count_max = 0;
 	other->x = NULL;
 	other->y = NULL;
-	ft_null_img(&other->img);
+	other->state = 0;
+	ft_null_img(&other->img[0]);
+	ft_null_img(&other->img[1]);
 }
 
 void	ft_init_struct(t_vars *vars)
 {
 	vars->mlx = NULL;
 	vars->win = NULL;
+	vars->steps = 0;
 	ft_null_map(&(vars->map));
 	ft_null_img(&(vars->img));
 	ft_null_img(&(vars->floor));
 	ft_null_img(&(vars->wall));
 	ft_null_img(&(vars->bg));
+	ft_null_img(&vars->digit);
+	ft_null_img(&vars->text);
 	ft_null_hero(&(vars->hero));
 	ft_null_other(&(vars->collect));
 	ft_null_other(&(vars->exit));

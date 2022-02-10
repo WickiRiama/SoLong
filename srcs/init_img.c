@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 11:01:48 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/08 20:37:21 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/10 16:58:16 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,18 @@ int	ft_init_tiles(t_vars *vars)
 			"./assets/grass.xpm", &vars->floor.width, &vars->floor.height);
 	vars->wall.mlx_img = mlx_xpm_file_to_image (vars->mlx, "./assets/tree.xpm",
 			&vars->wall.width, &vars->wall.height);
-	vars->collect.img.mlx_img = mlx_xpm_file_to_image (vars->mlx,
-			"./assets/marble.xpm", &vars->collect.img.width,
-			&vars->collect.img.height);
-	vars->exit.img.mlx_img = mlx_xpm_file_to_image (vars->mlx,
-			"./assets/cdoor.xpm", &vars->exit.img.width,
-			&vars->exit.img.height);
-	if (!(vars->floor.mlx_img && vars->wall.mlx_img && vars->collect.img.mlx_img
-			&& vars->exit.img.mlx_img))
+	vars->collect.img[0].mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/marble.xpm", &vars->collect.img[0].width,
+			&vars->collect.img[0].height);
+	vars->exit.img[0].mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/cdoor.xpm", &vars->exit.img[0].width,
+			&vars->exit.img[0].height);
+	vars->exit.img[1].mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/odoor.xpm", &vars->exit.img[1].width,
+			&vars->exit.img[1].height);
+	if (!(vars->floor.mlx_img && vars->wall.mlx_img
+			&& vars->collect.img[0].mlx_img && vars->exit.img[0].mlx_img
+			&& vars->exit.img[1].mlx_img))
 		return (-1);
 	return (0);
 }
@@ -75,20 +79,26 @@ int	ft_init_hero2(t_vars *vars, t_hero *hero)
 			&& hero->left[2].mlx_img && hero->right[0].mlx_img
 			&& hero->right[1].mlx_img && hero->right[2].mlx_img))
 		return (-1);
+	hero->current = hero->front;
 	return (0);
 }
 
 int	ft_init_bg(t_vars *vars)
 {
 	vars->bg.width = vars->floor.width * vars->map.width;
-	vars->bg.height = vars->floor.height * vars->map.height;
+	vars->bg.height = vars->floor.height * (vars->map.height + 1);
 	vars->img.width = vars->floor.width * vars->map.width;
-	vars->img.height = vars->floor.height * vars->map.height;
+	vars->img.height = vars->floor.height * (vars->map.height + 1);
 	vars->bg.mlx_img = mlx_new_image(vars->mlx, vars->bg.width,
 			vars->bg.height);
 	vars->img.mlx_img = mlx_new_image(vars->mlx, vars->img.width,
 			vars->img.height);
-	if (!vars->bg.mlx_img || !vars->img.mlx_img)
+	vars->digit.mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/digits.xpm", &vars->digit.width, &vars->digit.height);
+	vars->text.mlx_img = mlx_xpm_file_to_image (vars->mlx,
+			"./assets/text.xpm", &vars->text.width, &vars->text.height);
+	if (!(vars->bg.mlx_img && vars->img.mlx_img && vars->digit.mlx_img
+			&& vars->text.mlx_img))
 		return (-1);
 	return (0);
 }
