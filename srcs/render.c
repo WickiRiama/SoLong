@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:56:12 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/10 18:07:11 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/10 19:57:24 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	ft_render(t_vars *vars)
 	{
 		ft_render_img(vars, vars->bg, 0, 0);
 		i = 0;
-		while (i < vars->collect.count)
+		while (i < vars->collect.count_max)
 		{
 			ft_render_img(vars, vars->collect.img[vars->collect.state],
 				vars->collect.x[i], vars->collect.y[i]);
@@ -121,7 +121,5 @@ int	ft_render(t_vars *vars)
 		ft_itoimg(vars->steps, vars);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->img.mlx_img, 0, 0);
 	}
-	ft_check_collect(vars);
-	ft_check_exit(vars);
 	return (0);
 }

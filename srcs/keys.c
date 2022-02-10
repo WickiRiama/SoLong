@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:53:33 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/10 18:46:34 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/10 19:54:57 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,7 @@ int	ft_key_press(int keycode, t_vars *vars)
 		ft_move(vars, 1, 0);
 		vars->hero.current = vars->hero.right;
 	}
+	ft_check_collect(vars);
+	ft_check_exit(vars);
 	return (0);
 }
