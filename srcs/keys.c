@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:53:33 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/09 14:18:25 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/10 18:46:34 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_check_exit(t_vars *vars)
 			if (vars->hero.x == vars->exit.x[i]
 				&& vars->hero.y == vars->exit.y[i])
 			{
+				printf("Congratulations !\n");
 				mlx_loop_end(vars->mlx);
 				return ;
 			}
@@ -60,30 +61,37 @@ int	ft_key_release(int keycode, t_vars *vars)
 	return (0);
 }
 
+void	ft_move(t_vars *vars, int x, int y)
+{
+	if (vars->map.grid[vars->hero.y + y][vars->hero.x + x] != '1')
+	{
+		vars->steps ++;
+		vars->hero.x += x;
+		vars->hero.y += y;
+		printf("steps : %d\n", vars->steps);
+	}
+}
+
 int	ft_key_press(int keycode, t_vars *vars)
 {
-	if (keycode == 122 && vars->map.grid[vars->hero.y - 1][vars->hero.x] != '1')
+	if (keycode == 122)
 	{
-		vars->steps ++;
-		vars->hero.y -= 1;
+		ft_move(vars, 0, -1);
 		vars->hero.current = vars->hero.back;
 	}
-	if (keycode == 113 && vars->map.grid[vars->hero.y][vars->hero.x - 1] != '1')
+	if (keycode == 113)
 	{
-		vars->steps ++;
-		vars->hero.x -= 1;
+		ft_move(vars, -1, 0);
 		vars->hero.current = vars->hero.left;
 	}
-	if (keycode == 115 && vars->map.grid[vars->hero.y + 1][vars->hero.x] != '1')
+	if (keycode == 115)
 	{
-		vars->steps ++;
-		vars->hero.y += 1;
+		ft_move(vars, 0, 1);
 		vars->hero.current = vars->hero.front;
 	}
-	if (keycode == 100 && vars->map.grid[vars->hero.y][vars->hero.x + 1] != '1')
+	if (keycode == 100)
 	{
-		vars->steps ++;
-		vars->hero.x += 1;
+		ft_move(vars, 1, 0);
 		vars->hero.current = vars->hero.right;
 	}
 	return (0);
