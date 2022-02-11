@@ -6,13 +6,14 @@
 #    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 11:37:43 by mriant            #+#    #+#              #
-#    Updated: 2022/02/11 15:36:36 by mriant           ###   ########.fr        #
+#    Updated: 2022/02/11 16:33:28 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-SRCS = $(addprefix ./srcs/, digits.c \
+SRCS = $(addprefix ./srcs/, cleaning.c \
+	digits.c \
 	get_next_line.c \
 	get_next_line_utils.c \
 	init_addr.c \

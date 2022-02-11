@@ -6,31 +6,11 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:31:55 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 15:37:58 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 16:15:12 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	ft_clean_all(t_vars *vars)
-{
-	int	ret;
-
-	mlx_destroy_image(vars->mlx, vars->img.mlx_img);
-	mlx_destroy_image(vars->mlx, vars->floor.mlx_img);
-	mlx_destroy_image(vars->mlx, vars->bg.mlx_img);
-	mlx_destroy_image(vars->mlx, vars->wall.mlx_img);
-	mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_display(vars->mlx);
-	free(vars->mlx);
-	ret = 0;
-	while (vars->map.grid[ret])
-	{
-		free(vars->map.grid[ret]);
-		ret ++;
-	}
-	free(vars->map.grid);
-}
 
 int	ft_preloop(t_vars *vars, char **av)
 {
