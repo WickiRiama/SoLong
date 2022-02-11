@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 15:18:55 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 16:31:31 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 18:04:06 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_anim(t_vars *vars)
 		vars->delay --;
 	ft_check_collect(vars);
 	ft_check_exit(vars);
+	ft_check_foe(vars);
 }
 
 int	ft_set_img(t_vars *vars)

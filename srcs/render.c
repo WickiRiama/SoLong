@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:56:12 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 15:44:10 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 17:55:47 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int	ft_render(t_vars *vars)
 		ft_render_img(vars, vars->bg, 0, 0);
 		ft_render_other(vars, vars->collect);
 		ft_render_other(vars, vars->exit);
+		ft_render_other(vars, vars->foe);
 		ft_render_img(vars, vars->hero.current[vars->hero.state],
 			vars->hero.x, vars->hero.y);
 		ft_itoimg(vars->steps, vars);

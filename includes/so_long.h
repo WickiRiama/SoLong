@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:58:38 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 15:56:51 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 18:01:21 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_vars {
 	t_img		digit;
 	t_img		text;
 	t_hero		hero;
+	t_other		foe;
 	t_other		collect;
 	t_other		exit;
 }				t_vars;
@@ -86,6 +87,7 @@ void	ft_anim(t_vars *vars);
 int		ft_build_map(char *m_path, t_vars *vars);
 void	ft_check_collect(t_vars *vars);
 void	ft_check_exit(t_vars *vars);
+void	ft_check_foe(t_vars *vars);
 int		ft_check_map(t_vars *vars, char **grid);
 void	ft_clean_all(t_vars *vars);
 int		ft_count_assets(unsigned int i, unsigned int j, int *p, t_vars *vars);
@@ -114,6 +116,6 @@ void	ft_render_other(t_vars *vars, t_other other);
 void	ft_render_tile(t_vars *vars, t_img tile, int i, int j);
 int		ft_set_img(t_vars *vars);
 int		ft_set_map(int fd, t_vars *vars);
-void	ft_set_pos(t_other *other, int i, int j, int *n);
+void	ft_set_pos(t_other *other, int i, int j);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 13:36:46 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 15:56:05 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 17:41:35 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,12 @@ int	ft_addr_tiles(t_vars *vars)
 	vars->exit.img[1].addr = mlx_get_data_addr(vars->exit.img[1].mlx_img,
 			&vars->exit.img[1].bpp, &vars->exit.img[1].line_len,
 			&vars->exit.img[1].endian);
+	vars->foe.img[0].addr = mlx_get_data_addr(vars->foe.img[0].mlx_img,
+			&vars->foe.img[0].bpp, &vars->foe.img[0].line_len,
+			&vars->foe.img[0].endian);
 	if (!(vars->floor.addr && vars->wall.addr && vars->collect.img[0].addr
-			&& vars->exit.img[0].addr && vars->exit.img[1].addr))
+			&& vars->exit.img[0].addr && vars->exit.img[1].addr
+			&& vars->foe.img[0].addr))
 		return (-1);
 	return (0);
 }
