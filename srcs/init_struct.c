@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:33:20 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/10 16:56:56 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 12:36:48 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_null_hero(t_hero *hero)
 	hero->current = NULL;
 	hero->x = 0;
 	hero->y = 0;
+	hero->state = 0;
 }
 
 void	ft_null_other(t_other *other)
@@ -65,6 +66,7 @@ void	ft_init_struct(t_vars *vars)
 	vars->mlx = NULL;
 	vars->win = NULL;
 	vars->steps = 0;
+	vars->delay = 0;
 	ft_null_map(&(vars->map));
 	ft_null_img(&(vars->img));
 	ft_null_img(&(vars->floor));

@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:58:38 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/10 18:07:58 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 12:43:22 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_hero
 	t_img	*current;
 	int		x;
 	int		y;
+	int		state;
 }				t_hero;
 
 typedef struct s_other
@@ -62,6 +63,7 @@ typedef struct s_vars {
 	void		*mlx;
 	void		*win;
 	int			steps;
+	int			delay;
 	t_map		map;
 	t_img		img;
 	t_img		floor;
@@ -78,6 +80,7 @@ int		ft_addr_hero1(t_hero *hero);
 int		ft_addr_hero2(t_hero *hero);
 int		ft_addr_tiles(t_vars *vars);
 int		ft_alloc_pos(t_vars *vars);
+void	ft_anim(t_vars *vars);
 int		ft_build_map(char *m_path, t_vars *vars);
 void	ft_check_collect(t_vars *vars);
 void	ft_check_exit(t_vars *vars);

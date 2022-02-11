@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:53:33 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 12:09:02 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 12:44:52 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,15 @@ int	ft_key_release(int keycode, t_vars *vars)
 
 void	ft_move(t_vars *vars, int x, int y)
 {
-	if (vars->map.grid[vars->hero.y + y][vars->hero.x + x] != '1')
+	if (vars->hero.state == 0
+		&& vars->map.grid[vars->hero.y + y][vars->hero.x + x] != '1')
 	{
 		vars->steps ++;
 		vars->hero.x += x;
 		vars->hero.y += y;
 		printf("steps : %d\n", vars->steps);
+		vars->delay = 80;
+		vars->hero.state = 1;
 	}
 }
 

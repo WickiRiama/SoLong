@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:56:12 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/10 19:57:24 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 12:42:51 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int	ft_render(t_vars *vars)
 
 	if (vars->win)
 	{
+		ft_anim(vars);
 		ft_render_img(vars, vars->bg, 0, 0);
 		i = 0;
 		while (i < vars->collect.count_max)
@@ -117,7 +118,8 @@ int	ft_render(t_vars *vars)
 				vars->exit.x[i], vars->exit.y[i]);
 			i ++;
 		}
-		ft_render_img(vars, vars->hero.current[0], vars->hero.x, vars->hero.y);
+		ft_render_img(vars, vars->hero.current[vars->hero.state],
+			vars->hero.x, vars->hero.y);
 		ft_itoimg(vars->steps, vars);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->img.mlx_img, 0, 0);
 	}
