@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:58:38 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 18:01:21 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 18:31:05 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	ft_check_foe(t_vars *vars);
 int		ft_check_map(t_vars *vars, char **grid);
 void	ft_clean_all(t_vars *vars);
 int		ft_count_assets(unsigned int i, unsigned int j, int *p, t_vars *vars);
+void	ft_destroy_img(t_vars *vars);
 void	ft_img_pix_put(t_img *img, int x, int y, char *color);
 int		ft_init_bg(t_vars *vars);
 int		ft_init_hero1(t_vars *vars, t_hero *hero);

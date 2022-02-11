@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:31:55 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 16:15:12 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 18:18:30 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,17 @@ int	ft_preloop(t_vars *vars, char **av)
 int	main(int ac, char **av)
 {
 	t_vars	vars;
-	int		ret;
 
 	if (ac != 2)
 	{
 		printf("Error\nPass the path to the map as argument.\n");
 		return (-1);
 	}
-	ret = ft_preloop(&vars, av);
-	if (ret == -1)
+	if (ft_preloop(&vars, av) == -1)
+	{
+		ft_clean_all(&vars);
 		return (-1);
+	}
 	mlx_hook(vars.win, 17, 0, mlx_loop_end, (&vars)->mlx);
 	mlx_hook(vars.win, 02, (1L << 0), ft_key_press, &vars);
 	mlx_key_hook(vars.win, ft_key_release, &vars);

@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 17:53:34 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 19:22:34 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,14 @@ int	ft_build_map(char *m_path, t_vars *vars)
 	int		ret;
 
 	ret = ft_strlen(m_path);
-	fd = open(m_path, O_RDONLY);
-	if (fd == -1 || m_path[ret - 4] != '.' || m_path[ret - 3] != 'b'
+	if (ret < 4 || m_path[ret - 4] != '.' || m_path[ret - 3] != 'b'
 		|| m_path[ret - 2] != 'e' || m_path[ret - 1] != 'r')
+	{
+		printf("Error\nInvalid file %s\n.", m_path);
+		return (-1);
+	}
+	fd = open(m_path, O_RDONLY);
+	if (fd == -1)
 	{
 		printf("Error\nInvalid file %s\n.", m_path);
 		return (-1);
@@ -123,7 +128,5 @@ int	ft_build_map(char *m_path, t_vars *vars)
 		printf("Error\nCan't close file %s.\n", m_path);
 		return (-1);
 	}
-	if (ret == -1)
-		return (-1);
-	return (0);
+	return (ret);
 }
