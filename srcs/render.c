@@ -6,28 +6,11 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:56:12 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 12:42:51 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 15:44:10 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	ft_img_pix_put(t_img *img, int x, int y, char *color)
-{
-	char	*pixel;
-	int		i;
-
-	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	i = 0;
-	while (i < img->bpp)
-	{
-		if (*color)
-			*pixel = *color;
-		pixel ++;
-		color ++;
-		i += 8;
-	}
-}
 
 void	ft_render_tile(t_vars *vars, t_img tile, int i, int j)
 {
@@ -65,8 +48,7 @@ void	ft_render_img(t_vars *vars, t_img tile, int i, int j)
 		while (y < tile.height)
 		{
 			pixel = tile.addr + (y * tile.line_len + x * (tile.bpp / 8));
-			ft_img_pix_put(&vars->img, x + i * tile.width,
-				y + j * tile.height, pixel);
+			ft_img_pix_put(&vars->img, x + i, y + j, pixel);
 			y ++;
 		}
 		x ++;
@@ -96,28 +78,28 @@ void	ft_render_bg(t_vars *vars)
 	ft_render_tile(vars, vars->text, 0, vars->map.height);
 }
 
-int	ft_render(t_vars *vars)
+void	ft_render_other(t_vars *vars, t_other other)
 {
 	int	i;
 
+	i = 0;
+	while (i < other.count_max)
+	{
+		ft_render_img(vars, other.img[other.state],
+			other.x[i] * vars->floor.width,
+			other.y[i] * vars->floor.height);
+		i ++;
+	}
+}
+
+int	ft_render(t_vars *vars)
+{
 	if (vars->win)
 	{
 		ft_anim(vars);
 		ft_render_img(vars, vars->bg, 0, 0);
-		i = 0;
-		while (i < vars->collect.count_max)
-		{
-			ft_render_img(vars, vars->collect.img[vars->collect.state],
-				vars->collect.x[i], vars->collect.y[i]);
-			i ++;
-		}
-		i = 0;
-		while (i < vars->exit.count)
-		{
-			ft_render_img(vars, vars->exit.img[vars->exit.state],
-				vars->exit.x[i], vars->exit.y[i]);
-			i ++;
-		}
+		ft_render_other(vars, vars->collect);
+		ft_render_other(vars, vars->exit);
 		ft_render_img(vars, vars->hero.current[vars->hero.state],
 			vars->hero.x, vars->hero.y);
 		ft_itoimg(vars->steps, vars);

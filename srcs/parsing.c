@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/09 13:02:55 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 15:41:15 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	ft_check_map(t_vars *vars, char **grid)
 	if (vars->collect.count == 0 || vars->exit.count == 0 || count_p != 1)
 		return (-1);
 	vars->collect.count_max = vars->collect.count;
+	vars->exit.count_max = vars->exit.count;
 	return (0);
 }
 

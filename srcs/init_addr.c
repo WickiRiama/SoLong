@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 13:36:46 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/10 17:11:13 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 15:56:05 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,6 @@ int	ft_addr_tiles(t_vars *vars)
 			&vars->floor.line_len, &vars->floor.endian);
 	vars->wall.addr = mlx_get_data_addr(vars->wall.mlx_img, &vars->wall.bpp,
 			&vars->wall.line_len, &vars->wall.endian);
-	vars->img.addr = mlx_get_data_addr(vars->img.mlx_img, &vars->img.bpp,
-			&vars->img.line_len, &vars->img.endian);
-	vars->bg.addr = mlx_get_data_addr(vars->bg.mlx_img, &vars->bg.bpp,
-			&vars->bg.line_len, &vars->bg.endian);
 	vars->collect.img[0].addr = mlx_get_data_addr(vars->collect.img[0].mlx_img,
 			&vars->collect.img[0].bpp, &vars->collect.img[0].line_len,
 			&vars->collect.img[0].endian);
@@ -78,36 +74,24 @@ int	ft_addr_tiles(t_vars *vars)
 	vars->exit.img[1].addr = mlx_get_data_addr(vars->exit.img[1].mlx_img,
 			&vars->exit.img[1].bpp, &vars->exit.img[1].line_len,
 			&vars->exit.img[1].endian);
-	vars->digit.addr = mlx_get_data_addr(vars->digit.mlx_img, &vars->digit.bpp,
-			&vars->digit.line_len, &vars->digit.endian);
-	vars->text.addr = mlx_get_data_addr(vars->text.mlx_img, &vars->text.bpp,
-			&vars->text.line_len, &vars->text.endian);
-	if (!(vars->floor.addr && vars->wall.addr && vars->img.addr
-			&& vars->bg.addr && vars->collect.img[0].addr
-			&& vars->exit.img[0].addr && vars->exit.img[1].addr
-			&& vars->digit.addr && vars->text.addr))
+	if (!(vars->floor.addr && vars->wall.addr && vars->collect.img[0].addr
+			&& vars->exit.img[0].addr && vars->exit.img[1].addr))
 		return (-1);
 	return (0);
 }
 
-int	ft_set_img(t_vars *vars)
+int	ft_addr_bg(t_vars *vars)
 {
-	int	ret1;
-	int	ret2;
-	int	ret3;
-
-	ret1 = ft_init_tiles(vars);
-	ret2 = ft_init_hero1(vars, &(vars->hero));
-	ret3 = ft_init_hero2(vars, &(vars->hero));
-	if (ret1 == -1 || ret2 == -1 || ret3 == -1)
-		return (-1);
-	ret1 = ft_init_bg(vars);
-	if (ret1 == -1)
-		return (-1);
-	ret1 = ft_addr_tiles(vars);
-	ret2 = ft_addr_hero1(&(vars->hero));
-	ret3 = ft_addr_hero2(&(vars->hero));
-	if (ret1 == -1 || ret2 == -1 || ret3 == -1)
-		return (-1);
+	vars->img.addr = mlx_get_data_addr(vars->img.mlx_img, &vars->img.bpp,
+			&vars->img.line_len, &vars->img.endian);
+	vars->bg.addr = mlx_get_data_addr(vars->bg.mlx_img, &vars->bg.bpp,
+			&vars->bg.line_len, &vars->bg.endian);
+	vars->digit.addr = mlx_get_data_addr(vars->digit.mlx_img, &vars->digit.bpp,
+			&vars->digit.line_len, &vars->digit.endian);
+	vars->text.addr = mlx_get_data_addr(vars->text.mlx_img, &vars->text.bpp,
+			&vars->text.line_len, &vars->text.endian);
+	if (!(vars->img.addr && vars->bg.addr && vars->digit.addr
+			&& vars->text.addr))
+		return (1);
 	return (0);
 }

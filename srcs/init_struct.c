@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:33:20 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 12:36:48 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 15:03:24 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	ft_null_hero(t_hero *hero)
 	hero->x = 0;
 	hero->y = 0;
 	hero->state = 0;
+	hero->move[0] = 0;
+	hero->move[1] = 0;
 }
 
 void	ft_null_other(t_other *other)

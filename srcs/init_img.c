@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 11:01:48 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/10 16:58:16 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 14:44:24 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	ft_init_hero1(t_vars *vars, t_hero *hero)
 			&& hero->front[2].mlx_img && hero->back[0].mlx_img
 			&& hero->back[1].mlx_img && hero->back[2].mlx_img))
 		return (-1);
+	hero->x = hero->x * hero->front[0].width;
+	hero->y = hero->y * hero->front[0].height;
 	return (0);
 }
 

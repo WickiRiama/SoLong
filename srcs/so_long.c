@@ -6,11 +6,10 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:31:55 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 12:44:41 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 15:37:58 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// z:122 q:113 s:s:115 d:100
 #include "so_long.h"
 
 void	ft_clean_all(t_vars *vars)
@@ -58,17 +57,6 @@ int	ft_preloop(t_vars *vars, char **av)
 	}
 	ft_render_bg(vars);
 	return (0);
-}
-
-void	ft_anim(t_vars *vars)
-{
-	if (vars->delay == 0 && vars->hero.state != 0)
-	{
-		vars->delay = 80;
-		vars->hero.state = (vars->hero.state + 1) % 3;
-	}
-	else
-		vars->delay --;
 }
 
 int	main(int ac, char **av)

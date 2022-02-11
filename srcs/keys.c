@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:53:33 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 12:44:52 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 15:08:34 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ft_check_collect(t_vars *vars)
 	i = 0;
 	while (i < vars->collect.count_max)
 	{
-		if (vars->hero.x == vars->collect.x[i]
-			&& vars->hero.y == vars->collect.y[i])
+		if (vars->hero.x == vars->collect.x[i] * vars->floor.width
+			&& vars->hero.y == vars->collect.y[i] * vars->floor.height)
 		{
 			vars->collect.x[i] = -1;
 			vars->collect.y[i] = -1;
@@ -42,8 +42,8 @@ void	ft_check_exit(t_vars *vars)
 	{
 		while (i < vars->exit.count)
 		{
-			if (vars->hero.x == vars->exit.x[i]
-				&& vars->hero.y == vars->exit.y[i])
+			if (vars->hero.x == vars->exit.x[i] * vars->floor.width
+				&& vars->hero.y == vars->exit.y[i] * vars->floor.height)
 			{
 				printf("Congratulations !\n");
 				mlx_loop_end(vars->mlx);
@@ -63,15 +63,21 @@ int	ft_key_release(int keycode, t_vars *vars)
 
 void	ft_move(t_vars *vars, int x, int y)
 {
-	if (vars->hero.state == 0
-		&& vars->map.grid[vars->hero.y + y][vars->hero.x + x] != '1')
+	int	i;
+	int	j;
+
+	i = vars->hero.x / vars->floor.width;
+	j = vars->hero.y / vars->floor.height;
+	if (vars->hero.state == 0 && vars->map.grid[j + y][i + x] != '1')
 	{
 		vars->steps ++;
-		vars->hero.x += x;
-		vars->hero.y += y;
+		vars->hero.x += x * vars->floor.width / 3;
+		vars->hero.y += y * vars->floor.height / 3;
 		printf("steps : %d\n", vars->steps);
-		vars->delay = 80;
+		vars->delay = 10;
 		vars->hero.state = 1;
+		vars->hero.move[0] = x;
+		vars->hero.move[1] = y;
 	}
 }
 
@@ -97,7 +103,5 @@ int	ft_key_press(int keycode, t_vars *vars)
 		ft_move(vars, 1, 0);
 		vars->hero.current = vars->hero.right;
 	}
-	ft_check_collect(vars);
-	ft_check_exit(vars);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 11:37:43 by mriant            #+#    #+#              #
-#    Updated: 2022/02/10 18:08:58 by mriant           ###   ########.fr        #
+#    Updated: 2022/02/11 15:36:36 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRCS = $(addprefix ./srcs/, digits.c \
 	keys.c \
 	parsing.c \
 	render.c \
-	so_long.c )
+	sl_utils.c \
+	so_long.c)
 
 OBJS = ${SRCS:.c=.o}
 
