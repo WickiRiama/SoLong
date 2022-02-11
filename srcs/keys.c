@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:53:33 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/10 19:54:57 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/11 12:09:02 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,22 @@ void	ft_move(t_vars *vars, int x, int y)
 
 int	ft_key_press(int keycode, t_vars *vars)
 {
-	if (keycode == 122)
+	if (keycode == 119 || keycode == 65362)
 	{
 		ft_move(vars, 0, -1);
 		vars->hero.current = vars->hero.back;
 	}
-	if (keycode == 113)
+	if (keycode == 97 || keycode == 65361)
 	{
 		ft_move(vars, -1, 0);
 		vars->hero.current = vars->hero.left;
 	}
-	if (keycode == 115)
+	if (keycode == 115 || keycode == 65364)
 	{
 		ft_move(vars, 0, 1);
 		vars->hero.current = vars->hero.front;
 	}
-	if (keycode == 100)
+	if (keycode == 100 || keycode == 65363)
 	{
 		ft_move(vars, 1, 0);
 		vars->hero.current = vars->hero.right;
