@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:31:55 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 18:18:30 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/15 11:16:43 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@ int	ft_preloop(t_vars *vars, char **av)
 	vars->mlx = mlx_init();
 	if (!(vars->mlx))
 	{
-		printf("Error\nCould'nt initialize MLX\n");
+		ft_printf("Error\nCould'nt initialize MLX\n");
 		return (-1);
 	}
 	vars->win = mlx_new_window(vars->mlx, vars->map.width * 48,
 			(vars->map.height + 1) * 48, "Granny lost her marbles");
 	if (!(vars->win))
 	{
-		printf("Error\nCould'nt initialize window\n");
+		ft_printf("Error\nCould'nt initialize window\n");
 		return (-1);
 	}
 	if (ft_set_img(vars) == -1)
 	{
-		printf("Eroor\nCouldn't process images\n");
+		ft_printf("Eroor\nCouldn't process images\n");
 		return (-1);
 	}
 	ft_render_bg(vars);
@@ -45,7 +45,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		printf("Error\nPass the path to the map as argument.\n");
+		ft_printf("Error\nPass the path to the map as argument.\n");
 		return (-1);
 	}
 	if (ft_preloop(&vars, av) == -1)

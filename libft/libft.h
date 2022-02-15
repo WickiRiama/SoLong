@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mriant <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 17:16:58 by mriant            #+#    #+#             */
-/*   Updated: 2021/12/09 15:26:28 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/15 11:01:25 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <stdarg.h>
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -22,6 +23,7 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+typedef long long unsigned int	t_llui;
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -65,5 +67,16 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+int		ft_printf(const char *s, ...);
+void	ft_printint(long long int n, int *result, char *base, int len);
+void	ft_printuint(t_llui n, int *result, char *base, int len);
+int		ft_putdec(int n);
+int		ft_putpoint(intptr_t n);
+int		ft_putchar_int(char c);
+int		ft_putstr_int(char *s);
+int		ft_putuint(unsigned int n);
+int		ft_putx(unsigned int n);
+int		ft_putxmaj(unsigned int n);
+size_t	ft_strlen(const char *s);
 
 #endif

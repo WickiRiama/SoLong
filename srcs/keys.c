@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:53:33 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 17:58:38 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/15 11:16:20 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_move(t_vars *vars, int x, int y)
 		vars->steps ++;
 		vars->hero.x += x * vars->floor.width / 3;
 		vars->hero.y += y * vars->floor.height / 3;
-		printf("steps : %d\n", vars->steps);
+		ft_printf("steps : %d\n", vars->steps);
 		vars->delay = 10;
 		vars->hero.state = 1;
 		vars->hero.move[0] = x;

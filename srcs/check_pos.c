@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:57:50 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 18:00:56 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/15 11:13:14 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_check_exit(t_vars *vars)
 			if (vars->hero.x == vars->exit.x[i] * vars->floor.width
 				&& vars->hero.y == vars->exit.y[i] * vars->floor.height)
 			{
-				printf("Congratulations !\n");
+				ft_printf("Congratulations !\n");
 				mlx_loop_end(vars->mlx);
 				return ;
 			}
@@ -64,7 +64,7 @@ void	ft_check_foe(t_vars *vars)
 		if (vars->hero.x == vars->foe.x[i] * vars->floor.width
 			&& vars->hero.y == vars->foe.y[i] * vars->floor.height)
 		{
-			printf("Try again !\n");
+			ft_printf("Try again !\n");
 			mlx_loop_end(vars->mlx);
 			return ;
 		}

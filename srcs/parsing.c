@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 19:22:34 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/15 11:33:16 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,13 @@ int	ft_set_map(int fd, t_vars *vars)
 	ret = ft_parse_grid(&lst_grid, vars);
 	if (ret == -1 || !vars->map.grid[0])
 	{
-		printf("Error\nCouldn't read map\n");
+		ft_printf("Error\nCouldn't read map\n");
 		return (-1);
 	}
 	ret = ft_check_map(vars, vars->map.grid);
 	if (ret == -1)
 	{
-		printf("Error\nInvalid map\n");
+		ft_printf("Error\nInvalid map\n");
 		return (-1);
 	}
 	return (0);
@@ -112,20 +112,20 @@ int	ft_build_map(char *m_path, t_vars *vars)
 	if (ret < 4 || m_path[ret - 4] != '.' || m_path[ret - 3] != 'b'
 		|| m_path[ret - 2] != 'e' || m_path[ret - 1] != 'r')
 	{
-		printf("Error\nInvalid file %s\n.", m_path);
+		ft_printf("Error\nInvalid file %s\n", m_path);
 		return (-1);
 	}
 	fd = open(m_path, O_RDONLY);
 	if (fd == -1)
 	{
-		printf("Error\nInvalid file %s\n.", m_path);
+		ft_printf("Error\nInvalid file %s\n", m_path);
 		return (-1);
 	}
 	ret = ft_set_map(fd, vars);
 	fd = close(fd);
 	if (fd == -1)
 	{
-		printf("Error\nCan't close file %s.\n", m_path);
+		ft_printf("Error\nCan't close file %s.\n", m_path);
 		return (-1);
 	}
 	return (ret);

@@ -6,7 +6,7 @@
 #    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 11:37:43 by mriant            #+#    #+#              #
-#    Updated: 2022/02/11 18:01:59 by mriant           ###   ########.fr        #
+#    Updated: 2022/02/15 11:09:46 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,9 @@ LIB_FT = libft/libft.a
 
 DEPS = ${SRCS:.c=.d}
 
-CC = clang
+CC = cc
 
-FLAGS = -Wall -Wextra -Werror -g3
+FLAGS = -Wall -Wextra -Werror -g
 
 KERNEL = $(shell uname -s)
 
@@ -62,7 +62,7 @@ ${LIB_MLX}:
 	${RECIPE_OS}
 
 ${LIB_FT}:
-	make -C libft bonus
+	make -C libft
 
 %.o: %.c
 	${CC} ${FLAGS} -MMD -c $< -o $@ ${INC_DIR}

@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:12:15 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 17:50:28 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/15 11:14:21 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_alloc_pos(t_vars *vars)
 	if (!(vars->collect.x && vars->collect.y && vars->exit.x && vars->exit.y
 			&& vars->foe.x && vars->foe.y))
 	{
-		printf("Error\nMalloc error\n");
+		ft_printf("Error\nMalloc error\n");
 		return (-1);
 	}
 	return (0);

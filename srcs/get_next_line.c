@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:22:05 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/07 14:11:43 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/15 11:50:47 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,12 @@ long int	ft_readline(int fd, char **buf, char **line)
 	ret = 1;
 	while (ret > 0 && !ft_strchr(line[0], '\n'))
 	{
-		ret = read (fd, buf[0], BUFFER_SIZE);
-		buf[0][ret] = '\0';
-		line[0] = ft_strjoin_free(line[0], buf[0]);
+		ret = read(fd, buf[0], BUFFER_SIZE);
+		if (ret >= 0)
+		{
+			buf[0][ret] = '\0';
+			line[0] = ft_strjoin_free(line[0], buf[0]);
+		}
 	}
 	return (ret);
 }
@@ -106,29 +109,3 @@ char	*get_next_line(int fd)
 	free(buf);
 	return (line);
 }
-/*
-int	main(void)
-{
-	int		fd1;
-	int		fd2;
-
-	fd1 = open("test_file", O_RDONLY);
-	fd2 = open("test_file_2", O_RDONLY);
-	char	*str = get_next_line(fd1);
-	printf("fd1 :%s", str);
-	free(str);
-	while (str)
-	{
-		str = get_next_line(0);
-		printf("input : %s", str);
-		free(str);
-		str = get_next_line(fd2);
-		printf("fd2 : %s", str);
-		free(str);
-		str = get_next_line(fd1);
-		printf("fd1 : %s", str);
-		free (str);
-	}
-	close (fd1);
-	close (fd2);
-}*/

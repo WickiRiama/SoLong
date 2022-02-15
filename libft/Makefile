@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mriant <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 12:22:38 by mriant            #+#    #+#              #
-#    Updated: 2021/12/10 11:21:32 by mriant           ###   ########.fr        #
+#    Updated: 2022/02/15 11:06:04 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,9 +45,8 @@ SRCS = ft_isalpha.c \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
-	ft_putnbr_fd.c
-
-BONUS_SRCS = ft_lstnew.c \
+	ft_putnbr_fd.c \
+	ft_lstnew.c \
 	ft_lstadd_front.c \
 	ft_lstsize.c \
 	ft_lstlast.c \
@@ -55,33 +54,36 @@ BONUS_SRCS = ft_lstnew.c \
 	ft_lstdelone.c \
 	ft_lstclear.c \
 	ft_lstiter.c \
-	ft_lstmap.c
+	ft_lstmap.c \
+	ft_printf.c \
+	ft_printint.c \
+	ft_printstr.c \
+	ft_printuint.c
 
 HEAD_PATH = .
 
 OBJ = ${SRCS:%.c=%.o}
 
-BONUS_OBJ = ${BONUS_SRCS:%.c=%.o}
+DEPS = ${SRCS:.c=.d}
 
-FLAGS = -Wall -Wextra -Werror -g3
+FLAGS = -Wall -Wextra -Werror -g -MMD
 
 ${NAME}: ${OBJ} ${HEAD_PATH}/libft.h
 	ar -rcs ${NAME} ${OBJ}
 
-all: ${NAME} bonus
+all: ${NAME}
 
-bonus: ${NAME} ${BONUS_OBJ}
-	ar -rcs ${NAME} ${BONUS_OBJ}
-
-%.o: %.c ${HEAD_PATH}/libft.h
-	clang ${FLAGS} -c $< -o $@ -I ${HEAD_PATH}
+%.o: %.c
+	cc ${FLAGS} -c $< -o $@
 
 clean:
-	rm -rf ${OBJ} ${BONUS_OBJ}
+	rm -rf ${OBJ} ${DEPS}
 
 fclean: clean
 	rm -rf ${NAME}
 
 re: fclean ${NAME}
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
+
+-include ${DEPS}
