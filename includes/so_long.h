@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:58:38 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 18:31:05 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/15 14:23:03 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SO_LONG_H
 
 # include <mlx.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include "get_next_line.h"
 # include "libft.h"
@@ -65,6 +64,8 @@ typedef struct s_vars {
 	void		*win;
 	int			steps;
 	int			delay;
+	int			screen_x;
+	int			screen_y;
 	t_map		map;
 	t_img		img;
 	t_img		floor;

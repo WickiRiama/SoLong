@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:31:55 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/15 11:16:43 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/15 13:58:30 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	ft_preloop(t_vars *vars, char **av)
 {
 	ft_init_struct(vars);
-	if (ft_build_map(av[1], vars) == -1 || ft_init_pos(vars) == -1)
-		return (-1);
 	vars->mlx = mlx_init();
 	if (!(vars->mlx))
 	{
 		ft_printf("Error\nCould'nt initialize MLX\n");
 		return (-1);
 	}
+	if (ft_build_map(av[1], vars) == -1 || ft_init_pos(vars) == -1)
+		return (-1);
 	vars->win = mlx_new_window(vars->mlx, vars->map.width * 48,
 			(vars->map.height + 1) * 48, "Granny lost her marbles");
 	if (!(vars->win))

@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:33:20 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 17:37:31 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/15 13:55:23 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	ft_init_struct(t_vars *vars)
 	vars->win = NULL;
 	vars->steps = 0;
 	vars->delay = 0;
+	vars->screen_x = 0;
+	vars->screen_y = 0;
 	ft_null_map(&(vars->map));
 	ft_null_img(&(vars->img));
 	ft_null_img(&(vars->floor));

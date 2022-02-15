@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/15 11:33:16 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/15 14:24:32 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,13 @@ int	ft_set_map(int fd, t_vars *vars)
 	if (ret == -1)
 	{
 		ft_printf("Error\nInvalid map\n");
+		return (-1);
+	}
+	mlx_get_screen_size(vars->mlx, &vars->screen_x, &vars->screen_y);
+	if ((size_t)vars->screen_x < vars->map.width * 48
+		|| (size_t)vars->screen_y < vars->map.height * 48)
+	{
+		ft_printf("Error\nMap too big\n");
 		return (-1);
 	}
 	return (0);
