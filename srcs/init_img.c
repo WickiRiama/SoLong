@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 11:01:48 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/11 17:40:28 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/16 08:49:30 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_init_tiles(t_vars *vars)
 			"./assets/odoor.xpm", &vars->exit.img[1].width,
 			&vars->exit.img[1].height);
 	vars->foe.img[0].mlx_img = mlx_xpm_file_to_image (vars->mlx,
-			"./assets/odoor.xpm", &vars->foe.img[0].width,
+			"./assets/mushroom.xpm", &vars->foe.img[0].width,
 			&vars->foe.img[0].height);
 	if (!(vars->floor.mlx_img && vars->wall.mlx_img
 			&& vars->collect.img[0].mlx_img && vars->exit.img[0].mlx_img
