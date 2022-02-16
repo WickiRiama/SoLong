@@ -6,7 +6,7 @@
 #    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 11:37:43 by mriant            #+#    #+#              #
-#    Updated: 2022/02/15 11:09:46 by mriant           ###   ########.fr        #
+#    Updated: 2022/02/16 11:09:43 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,40 +29,32 @@ SRCS = $(addprefix ./srcs/, check_pos.c \
 
 OBJS = ${SRCS:.c=.o}
 
-LIB_FT = libft/libft.a
-
 DEPS = ${SRCS:.c=.d}
 
 CC = cc
 
 FLAGS = -Wall -Wextra -Werror -g
 
-KERNEL = $(shell uname -s)
+INC_DIR = $(addprefix -I, mlx_linux /usr/include includes libft)
 
-ifeq ($(KERNEL), Linux)
-	INC_DIR = $(addprefix -I, mlx_linux /usr/include includes libft)
-	LIB_DIR = $(addprefix -L, mlx_linux /usr/lib libft)
-	LIB_MLX = mlx_linux/libmlx.a
-	FLAGS_OS = -lXext -lX11 -lm -lz
-	RECIPE_OS = make -s -C mlx_linux
-else
-	INC_DIR = $(addprefix -I, mlx includes libft)
-	LIB_DIR = $(addprefix -L, mlx libft)
-	FLAGS_OS = -framework OpenGL -framework AppKit
-	LIB_MLX = mlx/mlx.a
-	RECIPE_OS = make -s -C mlx
-endif
+LIB_DIR = $(addprefix -L, mlx_linux /usr/lib libft)
+
+LIB_MLX = mlx_linux/libmlx.a
+
+LIB_FT = libft/libft.a
+
+LIBS = -lXext -lX11 -lm -lz -lmlx -lft
 
 all: ${NAME}
 
 ${NAME}: ${LIB_MLX} ${LIB_FT} ${OBJS}
-	${CC} ${FLAGS} ${OBJS} ${LIB_DIR} -lmlx -lft ${FLAGS_OS} -o ${NAME}
+	${CC} ${FLAGS} ${OBJS} ${LIB_DIR} ${LIBS} -o ${NAME}
 
 ${LIB_MLX}:
-	${RECIPE_OS}
+	make -s -C mlx_linux
 
 ${LIB_FT}:
-	make -C libft
+	make -s -C libft
 
 %.o: %.c
 	${CC} ${FLAGS} -MMD -c $< -o $@ ${INC_DIR}
@@ -73,7 +65,7 @@ clean:
 
 fclean: clean
 	rm -rf ${NAME}
-	${RECIPE_OS} clean
+	make -s -C mlx_linux clean
 	make -C libft fclean
 
 re: fclean all

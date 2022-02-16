@@ -10,3 +10,4 @@ test_file
 *.swp
 *.dSYM
 so_long
+./mlx_linux/test/mlx-test
