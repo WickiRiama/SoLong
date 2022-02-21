@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/15 14:24:32 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/21 09:58:58 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	ft_build_map(char *m_path, t_vars *vars)
 	int		ret;
 
 	ret = ft_strlen(m_path);
-	if (ret < 4 || m_path[ret - 4] != '.' || m_path[ret - 3] != 'b'
+	if (ret < 5 || m_path[ret - 4] != '.' || m_path[ret - 3] != 'b'
 		|| m_path[ret - 2] != 'e' || m_path[ret - 1] != 'r')
 	{
 		ft_printf("Error\nInvalid file %s\n", m_path);
