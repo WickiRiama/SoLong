@@ -6,7 +6,7 @@
 #    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 11:37:43 by mriant            #+#    #+#              #
-#    Updated: 2022/02/16 11:09:43 by mriant           ###   ########.fr        #
+#    Updated: 2022/02/22 11:30:34 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,8 @@ ${LIB_FT}:
 %.o: %.c
 	${CC} ${FLAGS} -MMD -c $< -o $@ ${INC_DIR}
 
+bonus: ${NAME}
+
 clean:
 	rm -rf ${OBJS} ${DEPS}
 	make -C libft clean
@@ -72,4 +74,4 @@ re: fclean all
 
 -include ${DEPS}
 
-.PHONY: clean fclean re
+.PHONY: all clean fclean re bonus
