@@ -5,9 +5,8 @@
 */*.a
 */*.o
 */*.d
-main.c
 test_file
 *.swp
 *.dSYM
 so_long
-./mlx_linux/test/mlx-test
+mlx_linux/test/mlx-test
