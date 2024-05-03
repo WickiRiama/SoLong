@@ -33,7 +33,7 @@ void	ft_anim(t_vars *vars)
 {
 	if (vars->delay == 0 && vars->hero.state != 0)
 	{
-		vars->delay = 10;
+		vars->delay = 50;
 		vars->hero.state = (vars->hero.state + 1) % 3;
 		vars->hero.x += vars->hero.move[0] * vars->floor.width / 3;
 		vars->hero.y += vars->hero.move[1] * vars->floor.height / 3;
