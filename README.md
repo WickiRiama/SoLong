@@ -5,9 +5,13 @@ A 2D isometric game
 ## Description
 
 It is a 42 school project, developped in C with the school graphic library, the minilibx.
+
 You are a grandmother trying to find her marbles in a forest.
 You have to pick up all the marbles in order to open the exit, and you can try to do it with the less possible moves.
+
 You can move with WASD keys or arrows.
+
+<p align="center"><img src="https://github.com/WickiRiama/SoLong/blob/master/readme/SoLong.gif"></p>
 
 ## Getting Started
 
